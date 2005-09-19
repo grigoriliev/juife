@@ -1,0 +1,68 @@
+
+juife - Java User Interface Framework Extensions
+
+by Grigor Iliev <gr.iliev@gmail.com>
+
+
+This library provides APIs for common components and utilities
+that are missing in the Java 2 Platform Standard Edition.
+
+You may download the latest version of the library from
+http://www.sourceforge.net/projects/juife/
+
+
+Requirements
+============
+
+To use juife you need java version 1.5.0 or higher.
+
+To build the library or the documentation you need
+JDK version 1.5.0 or higher and the Ant tool (http://ant.apache.org/).
+
+
+Compilation
+===========
+
+Notice that the package contains both the source and the binary files.
+So you can skip this section unless you want to rebuild the library or
+you are using version downloaded from cvs.
+ 
+To build the library or documentation follow the next steps.
+
+  1. Set the JAVA_HOME environment variable to point to your JDK directory.
+     If the JDK is installed in /opt/jdk1.5.0 directory, this can be done
+     with the following command:
+
+     export JAVA_HOME=/opt/jdk1.5.0
+
+     (Windows users must do something like `set JAVA_HOME=c:\jdk1.5.0')
+
+  2. Choose one or more of the following options.
+
+     - Building the library (juife.jar): `ant build-lib'
+
+     - Building the documentation: `ant build-doc'
+
+     - Building all (library, documentation): `ant build-all'
+
+     Also you may specify more then one target: `ant build-lib build-doc'
+
+
+Installation
+============
+
+To install juife as an extension just copy juife.jar in the following directory:
+
+<JDK-home>/jre/lib/ext
+
+If you don't want to install juife as an extension, you may use the following
+option when compiling or running an application that depends on it:
+
+-cp .:/path/to/juife/juife.jar
+
+
+Documentation
+=============
+
+The documentation is located in the doc directory.
+

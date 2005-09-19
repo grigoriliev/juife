@@ -1,0 +1,58 @@
+<project name="juife" default="build-lib" basedir=".">
+    <description>This buildfile is used to build the juife library</description>
+    
+    <property name="juife.version" value="0.1a"/>
+    
+    <target name="build-all" depends="build-lib,build-doc"/>
+        
+    <target name="build-lib" depends="clean-lib,build-manifest">
+        <javac debug="true" debuglevel="source,lines,vars" srcdir="./src" destdir="./lib/build"/>
+        <copy todir="./lib/build/net/sf/juife/langprops">
+            <fileset dir="./src/net/sf/juife/langprops"/>
+        </copy>
+        <copy todir="./lib/build/net/sf/juife">
+            <fileset dir="./res"/>
+        </copy>
+        <jar basedir="./lib/build" excludes="Manifest" destfile="./lib/juife.jar" manifest="./lib/build/Manifest"/>
+        <delete dir="./lib/build"/>
+    </target>
+    
+    <target name="build-doc" depends="clean-doc">
+        <mkdir dir="doc/api"/>
+        <javadoc sourcepath="./src" destdir="./doc/api" windowtitle="juife ${juife.version} API specification" overview="./src/overview.html" Author="false" splitindex="true" use="true">
+            <package name="net.sf.juife"/>
+            <package name="net.sf.juife.event"/>
+            <package name="net.sf.juife.plaf"/>
+            <package name="net.sf.juife.plaf.basic"/>
+            <package name="net.sf.juife.wizard"/>
+            <doctitle>jufie ${juife.version} API specification</doctitle>
+            <header><![CDATA[<b>juife</b><br><font size=-1>v${juife.version}</font>]]></header>
+            <bottom><![CDATA[<font size=-1>Copyright &copy; 2005 Grigor Iliev. All rights reserved.</font>]]></bottom>
+        </javadoc>
+    </target>
+    
+    <target name="build-manifest">
+        <mkdir dir="lib/build"/>
+        <manifest file="./lib/build/Manifest">
+            <section name="net/sf/juife/">
+                <attribute name="Specification-Title" value="Java User Interface Framework Extensions"/>
+                <attribute name="Specification-Version" value="0.1"/>
+                <attribute name="Specification-Vendor" value="Grigor Iliev"/>
+                <attribute name="Implementation-Title" value="net.sf.juife"/>
+                <attribute name="Implementation-Version" value="${juife.version}"/>
+                <attribute name="Implementation-Vendor" value="Grigor Iliev"/>
+            </section>
+        </manifest>
+    </target>
+    
+    <target name="clean-all" depends="clean-lib,clean-doc"/>
+    
+    <target name="clean-lib">
+        <delete dir="lib"/>
+    </target>
+    
+    <target name="clean-doc">
+        <delete dir="doc"/>
+    </target>
+</project>
+
