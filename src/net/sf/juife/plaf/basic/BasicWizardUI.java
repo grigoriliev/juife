@@ -307,6 +307,7 @@ public class BasicWizardUI extends WizardUI {
 			displayBackButton(true);
 			enableNextButton(true);
 			displayNextButton(true);
+			bottomPane.nextButton().requestFocus();
 			displayFinishButton(false);
 			displayCancelButton(true);
 			enableCancelButton(true);
@@ -318,6 +319,7 @@ public class BasicWizardUI extends WizardUI {
 			displayBackButton(true);
 			enableNextButton(true);
 			displayNextButton(true);
+			bottomPane.nextButton().requestFocus();
 			displayFinishButton(false);
 			displayCancelButton(true);
 			enableCancelButton(true);
@@ -326,8 +328,10 @@ public class BasicWizardUI extends WizardUI {
 		case CONFIRMATION_PAGE:
 			enableBackButton(true);
 			displayBackButton(true);
+			enableNextButton(false);
 			displayNextButton(false);
 			displayFinishButton(true);
+			bottomPane.finishButton().requestFocus();
 			displayCancelButton(true);
 			enableCancelButton(true);
 			displayCloseButton(false);
@@ -338,7 +342,7 @@ public class BasicWizardUI extends WizardUI {
 			enableNextButton(false);
 			displayNextButton(true);
 			displayFinishButton(true);
-			displayCancelButton(true);
+			bottomPane.finishButton().requestFocus();
 			displayCancelButton(true);
 			enableCancelButton(true);
 			displayCloseButton(false);
@@ -359,6 +363,7 @@ public class BasicWizardUI extends WizardUI {
 			displayFinishButton(false);
 			displayCancelButton(false);
 			displayCloseButton(true);
+			bottomPane.closeButton().requestFocus();
 			break;
 		default:
 			throw new IllegalArgumentException("Unknown wizard page type");	
@@ -435,7 +440,7 @@ public class BasicWizardUI extends WizardUI {
 	enableBackButton(boolean enabled) { bottomPane.backButton().setEnabled(enabled); }
 	
 	/**
-	 * Determines whether to enable the 'Nex't button in the Bottom Pane.
+	 * Determines whether to enable the 'Next' button in the Bottom Pane.
 	 * @param enabled Specify <code>true</code> to enable the 'Next' button in the Bottom Pane;
 	 * <code>false</code> to disable the 'Next' button.
 	 * @see javax.swing.JComponent#setEnabled

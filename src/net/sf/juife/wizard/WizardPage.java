@@ -22,7 +22,11 @@
 
 package net.sf.juife.wizard;
 
+import java.awt.Dialog;
+
 import javax.swing.JPanel;
+
+import net.sf.juife.JuifeUtils;
 import net.sf.juife.Wizard;
 
 
@@ -232,18 +236,48 @@ public class WizardPage extends JPanel {
 	}
 	
 	/**
-	 * Gets the Wizard this page belongs to.
-	 * @return the Wizard this page belongs to.
-	 *
+	 * Gets the <code>Wizard</code> to which this page belongs to.
+	 * Note that this method will return <code>null</code> until the
+	 * page becomes current in the wizard.
+	 * @return the <code>Wizard</code> to which this page belongs to,
+	 * or <code>null</code>.
+	 * @see #setWizard
+	 */
 	public Wizard
-	getWizard() { return wizard; }*/
+	getWizard() { return wizard; }
 	
 	/**
-	 * Sets the Wizard this page belongs to.
-	 * @param wizard the Wizard this page belongs to.
-	 *
+	 * Sets the <code>Wizard</code> to which this page belongs to.
+	 * @param wizard the <code>Wizard</code> to which this page belongs to.
+	 */
 	public void
-	setWizard(Wizard wizard) { this.wizard = wizard; }*/
+	setWizard(Wizard wizard) { this.wizard = wizard; }
+	
+	/**
+	 * Gets the <code>WizardModel</code> to which this page belongs to.
+	 * @return the <code>WizardModel</code> to which this page belongs to,
+	 * or <code>null</code> if <code>getWizard()</code> returns <code>null</code>.
+	 * @see #getWizard
+	 */
+	public WizardModel
+	getWizardModel() { return getWizard() == null ? null : getWizard().getModel(); }
+	
+	/**
+	 * Gets the wizard's dialog.
+	 * This method can be used to change the wizard's size, location, etc.
+	 * @return The wizard's dialog.
+	 */
+	public Dialog
+	getWizardDialog() { return (Dialog)JuifeUtils.getWindow(this); }
+	
+	/**
+	 * Invoked when the page becomes current in the wizard.
+	 * Override this method to do some initializations before the page is shown in the wizard.
+	 * The execution of this method should not be time consuming.
+	 * The current implementation does nothing.
+	 */
+	public void
+	initPage() { }
 	
 	/**
 	 * Invoked when the user clicks the 'Back' button

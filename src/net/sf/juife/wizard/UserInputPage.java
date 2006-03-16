@@ -197,7 +197,11 @@ public class UserInputPage extends WizardPage {
 	 */
 	public void
 	setAdditionalInstructions(String text) {
-		if(text == null || text.length() == 0) return;
+		if(text == null || text.length() == 0) {
+			additionalInstructionsPane.setVisible(false);
+			lAdditionalInstructions.setText("");
+			return;
+		}
 		
 		additionalInstructionsPane.setVisible(true);
 		lAdditionalInstructions.setText(text);

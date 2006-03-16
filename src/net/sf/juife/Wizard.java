@@ -25,6 +25,8 @@ package net.sf.juife;
 import java.awt.Dialog;
 import java.awt.Frame;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -170,6 +172,10 @@ public class Wizard extends JPanel {
 		
 		WizardModel oldModel = this.model;
 		this.model = model;
+		
+		if(oldModel != null) oldModel.removeActionListener(getHandler());
+		model.addActionListener(getHandler());
+		
 		firePropertyChange("model", oldModel, this.model);
 	}
 	
@@ -219,6 +225,14 @@ public class Wizard extends JPanel {
 		wizardDialog.setVisible(true);
 	}
 	
+	/**
+	 * Gets the wizard's dialog.
+	 * This method can be used to change the wizard's size, location, etc.
+	 * @return The wizard's dialog.
+	 */
+	public javax.swing.JDialog
+	getWizardDialog() { return wizardDialog; }
+	
 	private class WizardDialog extends EnhancedDialog {
 		WizardDialog(Frame owner, String title, boolean modal) {
 			super(owner, title, modal);
@@ -252,6 +266,20 @@ public class Wizard extends JPanel {
 			}
 		
 			if(getUI().mayCancelWizard()) cancelWizard();
+		}
+	}
+	
+	private final Handler handler = new Handler();
+	
+	private Handler
+	getHandler() { return handler; }
+	
+	private class Handler implements ActionListener {
+		/** Invoked when the current page of the wizard is changed */
+		public void
+		actionPerformed(ActionEvent e) {
+			getCurrentPage().setWizard(Wizard.this);
+			getCurrentPage().initPage();
 		}
 	}
 }

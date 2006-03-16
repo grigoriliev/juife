@@ -61,8 +61,8 @@ import static net.sf.juife.JuifeI18n.i18n;
  */
 public abstract class OkCancelDialog extends EnhancedDialog {
 	private JPanel pane = new JPanel(new BorderLayout());
-	private final JButton btnOk = new JButton(i18n.getButtonLabel("ok"));
-	private final JButton btnCancel = new JButton(i18n.getButtonLabel("cancel"));
+	protected final JButton btnOk = new JButton(i18n.getButtonLabel("ok"));
+	protected final JButton btnCancel = new JButton(i18n.getButtonLabel("cancel"));
 	private boolean cancelled = true;
 	
 	/**
@@ -71,7 +71,7 @@ public abstract class OkCancelDialog extends EnhancedDialog {
 	 * @param owner Specifies the <code>Frame</code> from which this dialog is displayed.
 	 */
 	public
-	OkCancelDialog(Frame owner) { this(owner, (Container)null); }
+	OkCancelDialog(Frame owner) { this(owner, new Container()); }
 	
 	/**
 	 * Creates a modal dialog with the specified title and owner <code>Frame</code>.
@@ -127,7 +127,7 @@ public abstract class OkCancelDialog extends EnhancedDialog {
 	 * @param owner Specifies the <code>Dialog</code> from which this dialog is displayed.
 	 */
 	public
-	OkCancelDialog(Dialog owner) { this(owner, (Container)null); }
+	OkCancelDialog(Dialog owner) { this(owner, new Container()); }
 	
 	/**
 	 * Creates a modal dialog with the specified title and owner <code>Dialog</code>.

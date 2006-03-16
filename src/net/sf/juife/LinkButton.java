@@ -347,7 +347,7 @@ public class LinkButton extends JButton {
 	 * @see #setEnabled
 	 */
 	public int
-	getDisabledFontStyle() { return unvisitedFontStyle; }
+	getDisabledFontStyle() { return disabledFontStyle; }
 	
 	/**
 	 * Sets the font style to be used when the link button is disabled.

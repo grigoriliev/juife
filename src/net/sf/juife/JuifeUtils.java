@@ -23,6 +23,7 @@
 package net.sf.juife;
 
 import java.awt.Component;
+import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Point;
@@ -106,7 +107,7 @@ public class JuifeUtils {
 	public static Window
 	getWindow(Component c) {
 		if(c == null) return null;
-		if(c instanceof Frame || c instanceof Frame) return (Window) c;
+		if(c instanceof Frame || c instanceof Dialog) return (Window) c;
 		return getWindow(c.getParent());
 	}
 }

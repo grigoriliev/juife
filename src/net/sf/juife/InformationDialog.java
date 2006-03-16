@@ -30,6 +30,8 @@ import java.awt.Frame;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -69,7 +71,7 @@ public class InformationDialog extends EnhancedDialog {
 	 * @param owner Specifies the <code>Frame</code> from which this dialog is displayed.
 	 */
 	public
-	InformationDialog(Frame owner) { this(owner, (Container)null); }
+	InformationDialog(Frame owner) { this(owner, new Container()); }
 	
 	/**
 	 * Creates a modal dialog with the specified title and owner <code>Frame</code>.
@@ -117,6 +119,10 @@ public class InformationDialog extends EnhancedDialog {
 		
 		initInformationDialog();
 		setMainPane(mainPane);
+		addWindowListener(new WindowAdapter() {
+			public void
+			windowActivated(WindowEvent e) { btnClose.requestFocusInWindow(); }
+		});
 	}
 	
 	/**
@@ -125,7 +131,7 @@ public class InformationDialog extends EnhancedDialog {
 	 * @param owner Specifies the <code>Dialog</code> from which this dialog is displayed.
 	 */
 	public
-	InformationDialog(Dialog owner) { this(owner, (Container)null); }
+	InformationDialog(Dialog owner) { this(owner, new Container()); }
 	
 	/**
 	 * Creates a modal dialog with the specified title and owner <code>Dialog</code>.
