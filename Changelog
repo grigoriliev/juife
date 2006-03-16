@@ -1,0 +1,10 @@
+juife v0.2a: 2006-03-16
+	* Wizard: Added getWizardDialog method
+	* WizardPage: Added initPage, getWizardModel, getWizard,
+	  setWizard, getWizardDialog methods
+	* WizardUI: Added displayBackButton, displayNextButton,
+	  displayLastButton, displayFinishButton, displayCancelButton,
+	  displayHelpButton, displayCloseButton, enableBackButton,
+	  enableNextButton, enableLastButton, enableFinishButton,
+	  enableCancelButton, enableHelpButton methods
+	* Some bugfixes
