@@ -1,7 +1,7 @@
 /*
  *   juife - Java User Interface Framework Extensions
  *
- *   Copyright (C) 2005 Grigor Kirilov Iliev
+ *   Copyright (C) 2005-2007 Grigor Iliev <grigor@grigoriliev.com>
  *
  *   This file is part of juife.
  *
@@ -67,8 +67,6 @@ public class BasicComponentListUI extends ComponentListUI {
 	
 	private JPanel listPane;
 	
-	private final Handler handler = new Handler();
-	
 	
 	private
 	BasicComponentListUI() { }
@@ -116,7 +114,6 @@ public class BasicComponentListUI extends ComponentListUI {
 	protected void
 	installListeners() {
 		componentList.addPropertyChangeListener(getHandler());
-		
 		componentList.addListSelectionListener(getHandler());
 		
 		listPane.addMouseListener(getHandler());
@@ -139,6 +136,7 @@ public class BasicComponentListUI extends ComponentListUI {
 	protected void
 	uninstallDefaults() {
 		componentList.remove(listPane);
+		componentList = null;
 		listPane = null;
 	}
 	
@@ -146,11 +144,10 @@ public class BasicComponentListUI extends ComponentListUI {
 	protected void
 	uninstallListeners() {
 		componentList.removePropertyChangeListener(getHandler());
-		
 		componentList.getModel().removeListDataListener(getHandler());
-		
 		componentList.removeListSelectionListener(getHandler());
-		componentList = null;
+		
+		listPane.removeMouseListener(getHandler());
 	}
 	
 	/**
@@ -257,10 +254,14 @@ public class BasicComponentListUI extends ComponentListUI {
 	
 	private void
 	updateList() {
+		for(Component c : listPane.getComponents()) c.removeMouseListener(getHandler());
+		
 		listPane.removeAll();
 		
 		for(int i = 0; i < componentList.getModel().getSize(); i++) {
-			listPane.add(componentList.getModel().get(i), i);
+			Component c = componentList.getModel().get(i);
+			listPane.add(c, i);
+			c.addMouseListener(getHandler());
 		}
 		
 		listPane.add(Box.createGlue());
@@ -271,6 +272,8 @@ public class BasicComponentListUI extends ComponentListUI {
 		listPane.revalidate();
 		listPane.repaint();
 	}
+	
+	private final Handler handler = new Handler();
 	
 	private Handler
 	getHandler() { return handler; }
@@ -339,7 +342,13 @@ public class BasicComponentListUI extends ComponentListUI {
 		mousePressed(MouseEvent e) {
 			ListSelectionModel sm = componentList.getSelectionModel();
 		
-			Component c = listPane.getComponentAt(e.getX(), e.getY());
+			Component c;
+			if(e.getSource() == listPane) {
+				c = listPane.getComponentAt(e.getX(), e.getY());
+			} else {
+				c = (Component)e.getSource();
+			}
+			
 			if(c == null) {
 				if(!listPane.hasFocus() && listPane.isRequestFocusEnabled())
 					listPane.requestFocus();

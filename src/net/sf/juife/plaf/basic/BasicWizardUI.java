@@ -1,7 +1,7 @@
 /*
  *   juife - Java User Interface Framework Extensions
  *
- *   Copyright (C) 2005 Grigor Kirilov Iliev
+ *   Copyright (C) 2005-2007 Grigor Iliev <grigor@grigoriliev.com>
  *
  *   This file is part of juife.
  *
@@ -247,6 +247,7 @@ public class BasicWizardUI extends WizardUI {
 		public void
 		actionPerformed(ActionEvent e) {
 			setCurrentPage(wizard.getModel().getCurrentPage());
+			wizard.getCurrentPage().postinitPage();
 		}
 		
 		public void

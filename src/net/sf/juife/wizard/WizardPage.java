@@ -1,7 +1,7 @@
 /*
  *   juife - Java User Interface Framework Extensions
  *
- *   Copyright (C) 2005 Grigor Kirilov Iliev
+ *   Copyright (C) 2005-2007 Grigor Iliev <grigor@grigoriliev.com>
  *
  *   This file is part of juife.
  *
@@ -271,13 +271,22 @@ public class WizardPage extends JPanel {
 	getWizardDialog() { return (Dialog)JuifeUtils.getWindow(this); }
 	
 	/**
-	 * Invoked when the page becomes current in the wizard.
+	 * Invoked when the page is going to become current in the wizard.
 	 * Override this method to do some initializations before the page is shown in the wizard.
 	 * The execution of this method should not be time consuming.
 	 * The current implementation does nothing.
 	 */
 	public void
-	initPage() { }
+	preinitPage() { }
+	
+	/**
+	 * Invoked when the page becomes current in the wizard.
+	 * Override this method to do some initializations after the page is shown in the wizard.
+	 * The execution of this method should not be time consuming.
+	 * The current implementation does nothing.
+	 */
+	public void
+	postinitPage() { }
 	
 	/**
 	 * Invoked when the user clicks the 'Back' button

@@ -1,7 +1,7 @@
 /*
  *   juife - Java User Interface Framework Extensions
  *
- *   Copyright (C) 2005 Grigor Kirilov Iliev
+ *   Copyright (C) 2005-2007 Grigor Iliev <grigor@grigoriliev.com>
  *
  *   This file is part of juife.
  *
@@ -132,8 +132,6 @@ public class UserInputPage extends WizardPage {
 		mainPane.setAlignmentX(LEFT_ALIGNMENT);
 		add(mainPane);
 		
-		add(Box.createRigidArea(new Dimension(0, 12)));
-		
 		additionalInstructionsPane.setAlignmentX(LEFT_ALIGNMENT);
 		add(additionalInstructionsPane);
 		
@@ -172,6 +170,7 @@ public class UserInputPage extends WizardPage {
 		additionalInstructionsPane.setLayout (
 			new BoxLayout(additionalInstructionsPane, BoxLayout.Y_AXIS)
 		);
+		additionalInstructionsPane.add(Box.createRigidArea(new Dimension(0, 12)));
 		additionalInstructionsPane.add(lAdditionalInstructions);
 		
 		additionalInstructionsPane.setVisible(false);
