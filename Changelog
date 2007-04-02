@@ -1,3 +1,12 @@
+juife CVS HEAD (?)
+  * Some bugfixes and code cleanup
+
+juife v0.3a: 2006-08-07
+  * Implemented a dial knob.
+  * TaskQueue: Added removeTask method
+  * LinkButton: The mouse over state is now updated and when
+    the button received HierarchyEvent with flag SHOWING_CHANGED set.
+
 juife v0.2a: 2006-03-16
 	* Wizard: Added getWizardDialog method
 	* WizardPage: Added initPage, getWizardModel, getWizard,

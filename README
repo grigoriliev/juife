@@ -7,8 +7,19 @@ by Grigor Iliev <gr.iliev@gmail.com>
 This library provides APIs for common components and utilities
 that are missing in the Java 2 Platform Standard Edition.
 
+
+The Latest Version
+==================
+
 You may download the latest version of the library from
 http://www.sourceforge.net/projects/juife/
+
+
+License
+=======
+
+This software is licensed under the terms of
+the GNU General Public License Version 2 (see COPYING file).
 
 
 Requirements

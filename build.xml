@@ -1,7 +1,7 @@
 <project name="juife" default="build-lib" basedir=".">
     <description>This buildfile is used to build the juife library</description>
     
-    <property name="juife.version" value="0.2a"/>
+    <property name="juife.version" value="0.3a"/>
     
     <target name="build-all" depends="build-lib,build-doc"/>
         
@@ -36,7 +36,7 @@
         <manifest file="./lib/build/Manifest">
             <section name="net/sf/juife/">
                 <attribute name="Specification-Title" value="Java User Interface Framework Extensions"/>
-                <attribute name="Specification-Version" value="0.2"/>
+                <attribute name="Specification-Version" value="0.3"/>
                 <attribute name="Specification-Vendor" value="Grigor Iliev"/>
                 <attribute name="Implementation-Title" value="net.sf.juife"/>
                 <attribute name="Implementation-Version" value="${juife.version}"/>

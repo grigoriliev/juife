@@ -1,7 +1,7 @@
 /*
  *   juife - Java User Interface Framework Extensions
  *
- *   Copyright (C) 2005 Grigor Kirilov Iliev
+ *   Copyright (C) 2005-2007 Grigor Iliev <grigor@grigoriliev.com>
  *
  *   This file is part of juife.
  *
@@ -24,10 +24,6 @@ package net.sf.juife;
 
 import java.awt.Component;
 import java.awt.BorderLayout;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

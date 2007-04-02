@@ -1,7 +1,7 @@
 /*
  *   juife - Java User Interface Framework Extensions
  *
- *   Copyright (C) 2005 Grigor Kirilov Iliev
+ *   Copyright (C) 2005-2007 Grigor Iliev <grigor@grigoriliev.com>
  *
  *   This file is part of juife.
  *
@@ -226,6 +226,26 @@ public class Wizard extends JPanel {
 	}
 	
 	/**
+	 * Enables/disables the <code>Next</code>button.
+	 * Use this method to manually enable/disable the
+	 * <code>Next</code> button when needed.
+	 */
+	public void
+	enableNextButton(boolean enable) {
+		getUI().enableNextButton(enable);
+	}
+	
+	/**
+	 * Enables/disables the <code>Finish</code>button.
+	 * Use this method to manually enable/disable the
+	 * <code>Finish</code> button when needed.
+	 */
+	public void
+	enableFinishButton(boolean enable) {
+		getUI().enableFinishButton(enable);
+	}
+	
+	/**
 	 * Gets the wizard's dialog.
 	 * This method can be used to change the wizard's size, location, etc.
 	 * @return The wizard's dialog.
@@ -279,7 +299,7 @@ public class Wizard extends JPanel {
 		public void
 		actionPerformed(ActionEvent e) {
 			getCurrentPage().setWizard(Wizard.this);
-			getCurrentPage().initPage();
+			getCurrentPage().preinitPage();
 		}
 	}
 }

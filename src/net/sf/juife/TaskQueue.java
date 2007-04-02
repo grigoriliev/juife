@@ -1,7 +1,7 @@
 /*
  *   juife - Java User Interface Framework Extensions
  *
- *   Copyright (C) 2005 Grigor Kirilov Iliev
+ *   Copyright (C) 2005-2007 Grigor Iliev <grigor@grigoriliev.com>
  *
  *   This file is part of juife.
  *
@@ -297,6 +297,15 @@ public class TaskQueue {
 	/** Removes all pending tasks. */
 	public synchronized void
 	removePendingTasks() { taskQueue.clear(); }
+	
+	/**
+	 * Removes the specified task from the queue.
+	 * @param t The task to be removed.
+	 * @return <code>true</code> if the queue contains the specified element,
+	 * <code>false</code> otherwise.
+	 */
+	public synchronized boolean
+	removeTask(Task t) { return taskQueue.remove(t); }
 	
 	
 	private static int serial = 0;

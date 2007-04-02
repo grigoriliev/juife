@@ -1,7 +1,7 @@
 /*
  *   juife - Java User Interface Framework Extensions
  *
- *   Copyright (C) 2005 Grigor Kirilov Iliev
+ *   Copyright (C) 2005-2007 Grigor Iliev <grigor@grigoriliev.com>
  *
  *   This file is part of juife.
  *
@@ -30,11 +30,15 @@ import java.awt.font.TextAttribute;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.HierarchyEvent;
+import java.awt.event.HierarchyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.Action;
 import javax.swing.JButton;
+
+import static java.awt.event.HierarchyEvent.SHOWING_CHANGED;
 
 
 /**
@@ -113,6 +117,7 @@ public class LinkButton extends JButton {
 		
 		addMouseListener(getHandler());
 		addActionListener(getHandler());
+		addHierarchyListener(getHandler());
 		
 		setFont(getFont().deriveFont(Font.PLAIN));
 	}
@@ -384,7 +389,7 @@ public class LinkButton extends JButton {
 	private Handler
 	getHandler() { return handler; }
 	
-	private class Handler extends MouseAdapter implements ActionListener {
+	private class Handler extends MouseAdapter implements ActionListener, HierarchyListener {
 		private Font font = null;
 		
 		/** Invoked when the mouse enters a component. */
@@ -418,6 +423,15 @@ public class LinkButton extends JButton {
 		/** Invoked when the link button is pressed. */
 		public void
 		actionPerformed(ActionEvent e) { setVisited(true); }
+	
+		/** Called when the hierarchy has been changed. */
+		public void
+		hierarchyChanged(HierarchyEvent e) {
+			if((e.getChangeFlags() & SHOWING_CHANGED) == SHOWING_CHANGED) {
+				if(getMousePosition() == null) mouseExited(null);
+				else mouseEntered(null);
+			}
+		}
 	}
 	
 	/** Updates the font color of this link button. */
