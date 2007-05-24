@@ -35,9 +35,9 @@ import java.util.Vector;
  * <b>Note</b> that this implementation of {@link NavigationHistoryModel} is not synchronized.
  * @author Grigor Iliev
  */
-public class DefaultNavigationHistoryModel implements NavigationHistoryModel {
-	private final LinkedList<NavigationPage> histList = new LinkedList<NavigationPage>();
-	private ListIterator<NavigationPage> listIt = histList.listIterator();
+public class DefaultNavigationHistoryModel<P> implements NavigationHistoryModel<P> {
+	private final LinkedList<P> histList = new LinkedList<P>();
+	private ListIterator<P> listIt = histList.listIterator();
 	
 	private final Vector<ActionListener> listeners = new Vector<ActionListener>();
 	
@@ -80,7 +80,7 @@ public class DefaultNavigationHistoryModel implements NavigationHistoryModel {
 	 * @param page The page to be added to the history list.
 	 */
 	public void
-	addPage(NavigationPage page) {
+	addPage(P page) {
 		if(page == null) return;
 		if(page.equals(getCurrentPage())) return;
 		
@@ -100,13 +100,13 @@ public class DefaultNavigationHistoryModel implements NavigationHistoryModel {
 	 * there is no previous page in the history list.
 	 * @see #hasBack
 	 */
-	public NavigationPage
+	public P
 	goBack() {
 		if(!hasBack()) return null;
 		
-		NavigationPage p = listIt.previous();
+		listIt.previous();
 		fireActionPerformed();
-		return p;
+		return getCurrentPage();
 	}
 	
 	/**
@@ -126,13 +126,13 @@ public class DefaultNavigationHistoryModel implements NavigationHistoryModel {
 	 * there is no next page in the history list.
 	 * @see #hasForward
 	 */
-	public NavigationPage
+	public P
 	goForward() {
 		if(!listIt.hasNext()) return null;
 		
-		NavigationPage p = listIt.next();
+		listIt.next();
 		fireActionPerformed();
-		return p;
+		return getCurrentPage();
 	}
 	
 	/**
@@ -175,7 +175,7 @@ public class DefaultNavigationHistoryModel implements NavigationHistoryModel {
 	 * @return The current page in the history list or
 	 * <code>null</code> if the history list is empty.
 	 */
-	public NavigationPage
+	public P
 	getCurrentPage() {
 		int idx = listIt.previousIndex();
 		return (idx == -1) ? null : histList.get(idx);
@@ -191,7 +191,7 @@ public class DefaultNavigationHistoryModel implements NavigationHistoryModel {
 	/** Removes all pages from history list except the current page. */
 	public void
 	clearHistory() {
-		NavigationPage p = getCurrentPage();
+		P p = getCurrentPage();
 		if(p == null) return;
 		
 		histList.clear();
@@ -199,4 +199,12 @@ public class DefaultNavigationHistoryModel implements NavigationHistoryModel {
 		listIt.add(p);
 		fireActionPerformed();
 	}
+	
+	/**
+	 * Removes from the model the last page that was returned by
+	 * <code>goBack</code> or <code>goForward</code>.
+	 * @see java.util.ListIterator#remove
+	 */
+	protected void
+	removePage() { listIt.remove(); }
 }

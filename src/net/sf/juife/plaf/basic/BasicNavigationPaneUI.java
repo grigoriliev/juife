@@ -290,6 +290,12 @@ public class BasicNavigationPaneUI extends NavigationPaneUI {
 	}
 	
 	/**
+	 * Determines whether the titlebar should be visible.
+	 */
+	public void
+	setTitlebarVisiblie(boolean b) { tiltePane.setVisible(b); }
+	
+	/**
 	 * Reverses configuration which was done on the specified component
 	 * during <code>installUI</code>. This method is invoked when this
 	 * <code>BasicNavigationPaneUI</code> instance is being removed as

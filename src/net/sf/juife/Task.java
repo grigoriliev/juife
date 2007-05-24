@@ -73,6 +73,9 @@ public interface Task<R> {
 	 */
 	public String getErrorMessage();
 	
+	/** Gets a a detailed error information. */
+	public String getErrorDetails();
+	
 	/**
 	 * Gets the result of the task execution.
 	 * @return <code>R</code> instance providing the result of the task execution.

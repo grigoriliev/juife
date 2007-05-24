@@ -58,7 +58,7 @@ public class NavigationPane extends JPanel {
 	 * Creates a new instance of <code>NavigationPane</code>.
 	 */
 	public
-	NavigationPane() { this(new DefaultNavigationHistoryModel()); }
+	NavigationPane() { this(new DefaultNavigationHistoryModel<NavigationPage>()); }
 	
 	/**
 	 * Creates a new instance of <code>NavigationPane</code>
@@ -125,7 +125,7 @@ public class NavigationPane extends JPanel {
 	 * Gets the navigation history model of this pane.
 	 * @return The navigation history model of this pane.
 	 */
-	public NavigationHistoryModel
+	public NavigationHistoryModel<NavigationPage>
 	getModel() { return model; }
 	
 	/**
@@ -166,5 +166,13 @@ public class NavigationPane extends JPanel {
 		Color oldColor = titleBackground;
 		titleBackground = c;
 		firePropertyChange("titleBackground", oldColor, titleBackground);
+	}
+	
+	/**
+	 * Determines whether the titlebar should be visible.
+	 */
+	public void
+	setTitlebarVisiblie(boolean b) {
+		getUI().setTitlebarVisiblie(b);
 	}
 }

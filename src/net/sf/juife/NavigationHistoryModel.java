@@ -26,15 +26,13 @@ import java.awt.event.ActionListener;
 
 
 /**
- * This interface defines the data model for the
- * navigation history list in <code>NavigationPane</code>.
- *
+ * This interface defines the data model for a
+ * navigation history list.
  * <p>The change of the current page can be handled by registering
  * an <code>ActionListener</code> using the {@link #addActionListener} method.</p>
- *
  * @author Grigor Iliev
  */
-public interface NavigationHistoryModel {
+public interface NavigationHistoryModel<P> {
 	/**
 	 * Registers the specified <code>ActionListener</code> to be
 	 * notified about changes of the history list.
@@ -55,7 +53,7 @@ public interface NavigationHistoryModel {
 	 * the added page becomes current.
 	 * @param page The page to be added to the history list.
 	 */
-	public void addPage(NavigationPage page);
+	public void addPage(P page);
 	
 	/**
 	 * Goes to the previous page in the history list.
@@ -64,7 +62,7 @@ public interface NavigationHistoryModel {
 	 * there is no previous page in the history list.
 	 * @see #hasBack
 	 */
-	public NavigationPage goBack();
+	public P goBack();
 	
 	/**
 	 * Determines whether there is at least one
@@ -82,7 +80,7 @@ public interface NavigationHistoryModel {
 	 * there is no next page in the history list.
 	 * @see #hasForward
 	 */
-	public NavigationPage goForward();
+	public P goForward();
 	
 	/**
 	 * Determines whether there is at least one
@@ -109,7 +107,7 @@ public interface NavigationHistoryModel {
 	 * @return The current page in the history list or
 	 * <code>null</code> if the history list is empty.
 	 */
-	public NavigationPage getCurrentPage();
+	public P getCurrentPage();
 	
 	/**
 	 * Gets the current number of pages in the history list.

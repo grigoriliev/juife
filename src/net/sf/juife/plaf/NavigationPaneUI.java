@@ -30,5 +30,8 @@ import javax.swing.plaf.PanelUI;
  * @author Grigor Iliev
  */
 public abstract class NavigationPaneUI extends PanelUI {
-	
+	/**
+	 * Determines whether the titlebar should be visible.
+	 */
+	public abstract void setTitlebarVisiblie(boolean b);
 }

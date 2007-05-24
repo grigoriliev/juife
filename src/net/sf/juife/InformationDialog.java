@@ -190,7 +190,7 @@ public class InformationDialog extends EnhancedDialog {
 		
 		btnPane.add(btnClose);
 		
-		btnPane.setBorder(BorderFactory.createEmptyBorder(17, 0, 0, 0));
+		btnPane.setBorder(BorderFactory.createEmptyBorder(6, 0, 0, 0));
 		
 		pane.add(btnPane, BorderLayout.SOUTH);
 		

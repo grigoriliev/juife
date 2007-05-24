@@ -40,6 +40,7 @@ public abstract class AbstractTask<R> implements Task<R>, Runnable {
 	
 	private int errorCode = UNKNOWN_ERROR;
 	private String errorMessage = null;
+	private String errorDetails = null;
 	private boolean isDone = false;
 	private boolean started = false;
 	private boolean doneWithErrors = false;
@@ -112,6 +113,14 @@ public abstract class AbstractTask<R> implements Task<R>, Runnable {
 		errorMessage = msg;
 		setDoneWithErrors(true);
 	}
+	
+	/** Gets a detailed error information. */
+	public String
+	getErrorDetails() { return errorDetails; }
+	
+	/** Sets a a detailed error information. */
+	public void
+	setErrorDetails(String details) { errorDetails = details; }
 	
 	/**
 	 * Gets the title of this task.
