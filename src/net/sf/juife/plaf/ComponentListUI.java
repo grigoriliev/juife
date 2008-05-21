@@ -35,4 +35,7 @@ public abstract class ComponentListUI extends PanelUI {
 	 * @param index The index of the component to make visible.
 	 */
 	public abstract void ensureIndexIsVisible(int index);
+	
+	/** Updates the component list UI. */
+	public abstract void updateList();
 }

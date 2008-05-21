@@ -22,6 +22,7 @@
 
 package net.sf.juife.plaf.basic;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -34,6 +35,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JSeparator;
 
@@ -260,6 +262,14 @@ public class BasicWizardUI extends WizardUI {
 				
 				if(old1 != null) old1.removeActionListener(getHandler());
 				if(new1 != null) new1.addActionListener(getHandler());
+			} else if(e.getPropertyName() == Wizard.BACK_BUTTON_ICON) {
+				bottomPane.backButton().setIcon((ImageIcon)e.getNewValue());
+			} else if(e.getPropertyName() == Wizard.NEXT_BUTTON_ICON) {
+				bottomPane.nextButton().setIcon((ImageIcon)e.getNewValue());
+			} else if(e.getPropertyName() == Wizard.LEFT_PANE_BACKGROUND_COLOR) {
+				leftPane.setBackground((Color)e.getNewValue());
+			} else if(e.getPropertyName() == Wizard.LEFT_PANE_FOREGROUND_COLOR) {
+				leftPane.setForegroundColor((Color)e.getNewValue());
 			}
 		}
 	}

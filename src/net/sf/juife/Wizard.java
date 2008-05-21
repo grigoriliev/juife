@@ -58,6 +58,18 @@ public class Wizard extends JPanel {
 	}
 	private static final String uiClassID = "WizardUI";
 	
+	/** Property for setting the icon of the <b>Back</b> button. */
+	public static final String BACK_BUTTON_ICON = "Wizard.backButtonIcon";
+	
+	/** Property for setting the icon of the <b>Next</b> button. */
+	public static final String NEXT_BUTTON_ICON = "Wizard.nextButtonIcon";
+	
+	/** Property for setting the background color of the left pane. */
+	public static final String LEFT_PANE_BACKGROUND_COLOR = "Wizard.leftPaneBackgroundColor";
+	
+	/** Property for setting the foreground color of the left pane. */
+	public static final String LEFT_PANE_FOREGROUND_COLOR = "Wizard.leftPaneForegroundColor";
+	
 	private final WizardDialog wizardDialog;
 	
 	private WizardModel model = new DefaultWizardModel();

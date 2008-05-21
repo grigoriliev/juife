@@ -26,9 +26,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 
+import java.util.Vector;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -47,6 +50,9 @@ public class BasicWizardLeftPane extends JPanel {
 	private JPanel stepsPane = new JPanel();
 	
 	private JScrollPane spSteps;
+	
+	private Color fgColor = lSteps.getForeground();
+	private Vector<JComponent> comps = new Vector<JComponent>();
 	
 	
 	/** Creates new instance of <code>BasicWizardLeftPane</code>. */
@@ -96,6 +102,7 @@ public class BasicWizardLeftPane extends JPanel {
 	protected void
 	setSteps(String[] steps, String currentStep) {
 		stepsPane.removeAll();
+		comps.removeAllElements();
 		
 		for(int i = 0; i < steps.length; i++) {
 			boolean current = (steps[i] == currentStep);
@@ -118,7 +125,9 @@ public class BasicWizardLeftPane extends JPanel {
 		
 		JLabel lNum = new JLabel(String.valueOf(index) + ".");
 		lNum.setAlignmentY(lNum.TOP_ALIGNMENT);
+		lNum.setForeground(getForegroundColor());
 		p.add(lNum);
+		comps.add(lNum);
 		
 		p.add(Box.createRigidArea(new Dimension(6, 0)));
 		
@@ -127,8 +136,11 @@ public class BasicWizardLeftPane extends JPanel {
 		txtDesc.setMaximumSize(new Dimension(30000, txtDesc.getPreferredSize().width));
 		txtDesc.setLineWrap(true);
 		txtDesc.setWrapStyleWord(true);
-		txtDesc.setEditable(false);
+		txtDesc.setEnabled(false);
 		txtDesc.setOpaque(false);
+		txtDesc.setBorder(BorderFactory.createEmptyBorder());
+		txtDesc.setForeground(getForegroundColor());
+		txtDesc.setDisabledTextColor(getForegroundColor());
 		
 		if(current) {
 			lNum.setFont(lNum.getFont().deriveFont(Font.BOLD));
@@ -142,7 +154,29 @@ public class BasicWizardLeftPane extends JPanel {
 		}
 		
 		p.add(txtDesc);
+		comps.add(txtDesc);
 		
 		return p;
+	}
+	
+	public void
+	setForegroundColor(Color c) {
+		fgColor = c;
+		updateFg();
+	}
+	
+	public Color
+	getForegroundColor() { return fgColor; }
+	
+	private void
+	updateFg() {
+		lSteps.setForeground(getForegroundColor());
+		
+		for(JComponent c : comps) {
+			c.setForeground(getForegroundColor());
+			if(c instanceof JTextArea) {
+				((JTextArea)c).setDisabledTextColor(getForegroundColor());
+			}
+		}
 	}
 }

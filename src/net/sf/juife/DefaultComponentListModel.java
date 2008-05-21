@@ -32,8 +32,10 @@ import javax.swing.AbstractListModel;
  * This class provides default implementation of the <code>ComponentListModel</code> interface.
  * @author Grigor Iliev
  */
-public class DefaultComponentListModel extends AbstractListModel implements ComponentListModel {
-	private final Vector<Component> list = new Vector<Component>();
+public class DefaultComponentListModel<C extends Component>
+			extends AbstractListModel implements ComponentListModel<C> {
+	
+	private final Vector<C> list = new Vector<C>();
 	
 	/** Creates a new instance of DefaultComponentListModel */
 	public DefaultComponentListModel() {
@@ -45,7 +47,7 @@ public class DefaultComponentListModel extends AbstractListModel implements Comp
 	 * @return The component at the specified index.
 	 * @throws ArrayIndexOutOfBoundsException If the index is out of range.
 	 */
-	public Component
+	public C
 	get(int index) { return list.get(index); }
 	
 	/**
@@ -66,7 +68,7 @@ public class DefaultComponentListModel extends AbstractListModel implements Comp
 	 * @throws ArrayIndexOutOfBoundsException  If the index is invalid.
 	 */
 	public void
-	insert(Component c, int index) {
+	insert(C c, int index) {
 		list.insertElementAt(c, index);
 		fireIntervalAdded(this, index, index);
 	}
@@ -76,7 +78,7 @@ public class DefaultComponentListModel extends AbstractListModel implements Comp
 	 * @param c The component to be added.
 	 */
 	public void
-	add(Component c) {
+	add(C c) {
 		int idx = list.size();
 		list.add(c);
 		fireIntervalAdded(this, idx, idx);
@@ -88,8 +90,8 @@ public class DefaultComponentListModel extends AbstractListModel implements Comp
 	 * @param c The component to be stored at the specified position.
 	 * @return The previous component at the specified position.
 	 */
-	public Component
-	set(int index, Component c) {
+	public C
+	set(int index, C c) {
 		c = list.set(index, c);
 		fireContentsChanged(this, index, index);
 		
@@ -101,11 +103,11 @@ public class DefaultComponentListModel extends AbstractListModel implements Comp
 	 * @param c The component to be moved up.
 	 */
 	public void
-	moveUp(Component c) {
+	moveUp(C c) {
 		int idx = indexOf(c);
 		if(idx < 1) return;
 		
-		Component c2 = get(idx - 1);
+		C c2 = get(idx - 1);
 			
 		list.set(idx, c2);
 		list.set(idx - 1, c);
@@ -118,11 +120,11 @@ public class DefaultComponentListModel extends AbstractListModel implements Comp
 	 * @param c The component to be moved down.
 	 */
 	public void
-	moveDown(Component c) {
+	moveDown(C c) {
 		int idx = indexOf(c);
 		if(idx == -1 || idx >= size() - 1) return;
 		
-		Component c2 = get(idx + 1);
+		C c2 = get(idx + 1);
 			
 		list.set(idx, c2);
 		list.set(idx + 1, c);
@@ -137,7 +139,7 @@ public class DefaultComponentListModel extends AbstractListModel implements Comp
 	 * <code>false</code> otherwise.
 	 */
 	public boolean
-	remove(Component c) {
+	remove(C c) {
 		int idx = list.indexOf(c);
 		boolean b = list.remove(c);
 		
@@ -152,9 +154,9 @@ public class DefaultComponentListModel extends AbstractListModel implements Comp
 	 * @return The removed component.
 	 * @throws ArrayIndexOutOfBoundsException If the index is out of range.
 	 */
-	public Component
+	public C
 	remove(int index) {
-		Component c = list.remove(index);
+		C c = list.remove(index);
 		fireIntervalRemoved(this, index, index);
 		
 		return c;

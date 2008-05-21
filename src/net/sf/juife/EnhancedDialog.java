@@ -47,6 +47,8 @@ import javax.swing.SwingUtilities;
  * @author Grigor Iliev
  */
 public abstract class EnhancedDialog extends JDialog {
+	private boolean cancelled = true;
+	
 	/**
 	 * Creates a modal dialog without a title and with the specified
 	 * <code>Dialog</code> as its owner.
@@ -127,7 +129,10 @@ public abstract class EnhancedDialog extends JDialog {
 		
 		getRootPane().getActionMap().put ("Applying...", new AbstractAction() {
 			public void
-			actionPerformed(ActionEvent e) { onOk(); }
+			actionPerformed(ActionEvent e) {
+				setCancelled(false);
+				onOk();
+			}
 		});
 		
 		
@@ -138,15 +143,37 @@ public abstract class EnhancedDialog extends JDialog {
 		
 		getRootPane().getActionMap().put ("Canceling...", new AbstractAction() {
 			public void
-			actionPerformed(ActionEvent e) { onCancel(); }
+			actionPerformed(ActionEvent e) {
+				setCancelled(true);
+				onCancel();
+			}
 		});
 		
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
 			public void
-			windowClosing(WindowEvent we) { onCancel(); }
+			windowClosing(WindowEvent we) {
+				setCancelled(true);
+				onCancel();
+			}
 		});
 	}
+	
+	/**
+	 * This method can be used when the user closes the
+	 * dialog to determine whether the dialog was cancelled.
+	 * @return <code>true</code> if the user cancels the dialog, <code>false</code> otherwise.
+	 */
+	public boolean
+	isCancelled() { return cancelled; }
+	
+	/**
+	 * Sets whether the dialog was cancelled.
+	 * @param b Specify <code>true</code> to indicate that this dialog was cancelled;
+	 * <code>false</code> otherwise.
+	 */
+	public void
+	setCancelled(boolean b) { cancelled = b; }
 	
 	/**
 	 * Shows or hides this dialog.

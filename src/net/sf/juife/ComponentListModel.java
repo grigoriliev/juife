@@ -31,12 +31,12 @@ import java.awt.Component;
  * This interface defines the data model for <code>ComponentList</code>.
  * @author Grigor Iliev
  */
-public interface ComponentListModel extends ListModel {
+public interface ComponentListModel<C extends Component> extends ListModel {
 	/**
 	 * Adds the specified component at the end of the list.
 	 * @param c The component to be added.
 	 */
-	public void add(Component c);
+	public void add(C c);
 	
 	/**
 	 * Inserts the specified component at the specified index.
@@ -44,7 +44,7 @@ public interface ComponentListModel extends ListModel {
 	 * @param index The position of the new component.
 	 * @throws ArrayIndexOutOfBoundsException  If the index is invalid.
 	 */
-	public void insert(Component c, int index);
+	public void insert(C c, int index);
 	
 	/**
 	 * Removes the specified component.
@@ -52,7 +52,7 @@ public interface ComponentListModel extends ListModel {
 	 * @return <code>true</code> if the list contained the specified component,
 	 * <code>false</code> otherwise.
 	 */
-	public boolean remove(Component c);
+	public boolean remove(C c);
 	
 	/**
 	 * Removes the component at the specified position.
@@ -60,14 +60,14 @@ public interface ComponentListModel extends ListModel {
 	 * @return The removed component.
 	 * @throws ArrayIndexOutOfBoundsException If the index is out of range.
 	 */
-	public Component remove(int index);
+	public C remove(int index);
 	
 	/**
 	 * Gets the component at the specified index.
 	 * @param index The requested index.
 	 * @return The component at the specified index.
 	 */
-	public Component get(int index);
+	public C get(int index);
 	
 	/**
 	 * Replaces the component at the specified position with the specified component.
@@ -75,7 +75,7 @@ public interface ComponentListModel extends ListModel {
 	 * @param c The component to be stored at the specified position.
 	 * @return The previous component at the specified position.
 	 */
-	public Component set(int index, Component c);
+	public C set(int index, C c);
 	
 	/**
 	 * Gets the length of the list.

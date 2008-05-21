@@ -252,7 +252,8 @@ public class BasicComponentListUI extends ComponentListUI {
 		}
 	}
 	
-	private void
+	/** Updates the component list UI. */
+	public void
 	updateList() {
 		for(Component c : listPane.getComponents()) c.removeMouseListener(getHandler());
 		
@@ -291,7 +292,7 @@ public class BasicComponentListUI extends ComponentListUI {
 			int max = Math.max(e.getIndex0(), e.getIndex1());
 			m.insertIndexInterval(min, max - min + 1, true);
 			
-			updateList();
+			if(componentList.getAutoUpdate()) updateList();
 		}
 		
 		public void
@@ -299,11 +300,13 @@ public class BasicComponentListUI extends ComponentListUI {
 			ListSelectionModel m = componentList.getSelectionModel();
 			if(m != null) m.removeIndexInterval(e.getIndex0(), e.getIndex1());
 			
-			updateList();
+			if(componentList.getAutoUpdate()) updateList();
 		}
 		
 		public void
-		contentsChanged(ListDataEvent e) { updateList(); }
+		contentsChanged(ListDataEvent e) {
+			if(componentList.getAutoUpdate()) updateList();
+		}
 		///////
 		
 		

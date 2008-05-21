@@ -63,7 +63,6 @@ public abstract class OkCancelDialog extends EnhancedDialog {
 	private JPanel pane = new JPanel(new BorderLayout());
 	protected final JButton btnOk = new JButton(i18n.getButtonLabel("ok"));
 	protected final JButton btnCancel = new JButton(i18n.getButtonLabel("cancel"));
-	private boolean cancelled = true;
 	
 	/**
 	 * Creates a modal dialog without a title and with the specified
@@ -209,33 +208,20 @@ public abstract class OkCancelDialog extends EnhancedDialog {
 		
 		btnCancel.addActionListener(new ActionListener() {
 			public void
-			actionPerformed(ActionEvent e) { onCancel(); }
+			actionPerformed(ActionEvent e) {
+				setCancelled(true);
+				onCancel();
+			}
 		});
 		
 		btnOk.addActionListener(new ActionListener() {
 			public void
 			actionPerformed(ActionEvent e) {
-				cancelled = false;
+				setCancelled(false);
 				onOk();
 			}
 		});
 	}
-	
-	/**
-	 * This method can be used when the user closes the
-	 * dialog to determine whether the dialog was cancelled.
-	 * @return <code>true</code> if the user cancels the dialog, <code>false</code> otherwise.
-	 */
-	public boolean
-	isCancelled() { return cancelled; }
-	
-	/**
-	 * Sets whether the dialog was cancelled.
-	 * @param b Specify <code>true</code> to indicate that this dialog was cancelled;
-	 * <code>false</code> otherwise.
-	 */
-	public void
-	setCancelled(boolean b) { cancelled = b; }
 	
 	/**
 	 * Sets the main pane of this dialog and centers the dialog relatvely to its owner.

@@ -67,6 +67,8 @@ public class ComponentList extends JPanel {
 	private ListSelectionModel selectionModel;
 	private final ListSelectionListener selectionHandler;
 	
+	private boolean autoUpdate = true;
+	
 	/** Creates a new instance of <code>ComponentList</code> */
 	public
 	ComponentList() { this(new DefaultComponentListModel()); }
@@ -396,6 +398,29 @@ public class ComponentList extends JPanel {
 	 */
 	public void
 	ensureIndexIsVisible(int index) { getUI().ensureIndexIsVisible(index); }
+	
+	/**
+	 * Determines whether the component list should be automatically updated
+	 * when component is added/removed. The default value is <code>true</code>.
+	 * @see updateList
+	 */
+	public boolean
+	getAutoUpdate() { return autoUpdate; }
+	
+	/**
+	 * Determines whether the component list should be automatically updated
+	 * when component is added/removed.
+	 * @see updateList
+	 */
+	public void
+	setAutoUpdate(boolean b) { autoUpdate = b; }
+	
+	/**
+	 * Updates the component list UI.
+	 * @see setAutoUpdate
+	 */
+	public void
+	updateList() { getUI().updateList(); }
 	
 	/**
 	 * Notifies all listeners that have registered interest for notification on this event type.
