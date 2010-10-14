@@ -1,7 +1,7 @@
 /*
  *   juife - Java User Interface Framework Extensions
  *
- *   Copyright (C) 2005-2007 Grigor Iliev <grigor@grigoriliev.com>
+ *   Copyright (C) 2005-2008 Grigor Iliev <grigor@grigoriliev.com>
  *
  *   This file is part of juife.
  *
@@ -91,6 +91,7 @@ public class BasicComponentListUI extends ComponentListUI {
 	 * installed as the UI delegate on the specified component.
 	 * @param c The component where this UI delegate is being installed.
 	 */
+	@Override
 	public void
 	installUI(JComponent c) {
 		componentList = (ComponentList) c;
@@ -126,6 +127,7 @@ public class BasicComponentListUI extends ComponentListUI {
 	 * the UI delegate for the specified component.
 	 * @param c The component from which this UI delegate is being removed.
 	 */
+	@Override
 	public void
 	uninstallUI(JComponent c) {
 		uninstallListeners();
@@ -154,6 +156,7 @@ public class BasicComponentListUI extends ComponentListUI {
 	 * Scrolls the viewport to make the specified component visible.
 	 * @param index The index of the component to make visible.
 	 */
+	@Override
 	public void
 	ensureIndexIsVisible(int index) {
 		if(index < 0 || index >= componentList.getModel().getSize()) return;
@@ -216,6 +219,7 @@ public class BasicComponentListUI extends ComponentListUI {
 		
 		Actions(String name) { super(name); }
 		
+		@Override
 		public void
 		actionPerformed(ActionEvent e) {
 			ComponentListModel dm = componentList.getModel();
@@ -253,6 +257,7 @@ public class BasicComponentListUI extends ComponentListUI {
 	}
 	
 	/** Updates the component list UI. */
+	@Override
 	public void
 	updateList() {
 		for(Component c : listPane.getComponents()) c.removeMouseListener(getHandler());
@@ -283,6 +288,7 @@ public class BasicComponentListUI extends ComponentListUI {
 			ListSelectionListener, PropertyChangeListener, MouseListener {
 		
 		// Implementation of ListDataListener interface
+		@Override
 		public void
 		intervalAdded(ListDataEvent e) {
 			ListSelectionModel m = componentList.getSelectionModel();
@@ -292,25 +298,31 @@ public class BasicComponentListUI extends ComponentListUI {
 			int max = Math.max(e.getIndex0(), e.getIndex1());
 			m.insertIndexInterval(min, max - min + 1, true);
 			
-			if(componentList.getAutoUpdate()) updateList();
+			boolean adjusting = componentList.getModel().getComponentListIsAdjusting();
+			if(componentList.getAutoUpdate() && !adjusting) updateList();
 		}
 		
+		@Override
 		public void
 		intervalRemoved(ListDataEvent e) {
 			ListSelectionModel m = componentList.getSelectionModel();
 			if(m != null) m.removeIndexInterval(e.getIndex0(), e.getIndex1());
 			
-			if(componentList.getAutoUpdate()) updateList();
+			boolean adjusting = componentList.getModel().getComponentListIsAdjusting();
+			if(componentList.getAutoUpdate() && !adjusting) updateList();
 		}
 		
+		@Override
 		public void
 		contentsChanged(ListDataEvent e) {
-			if(componentList.getAutoUpdate()) updateList();
+			boolean adjusting = componentList.getModel().getComponentListIsAdjusting();
+			if(componentList.getAutoUpdate() && !adjusting) updateList();
 		}
 		///////
 		
 		
 		// Implementation of ListSelectionListener interface
+		@Override
 		public void
 		valueChanged(ListSelectionEvent e) {
 			for(int i = e.getFirstIndex(); i <= e.getLastIndex(); i++)
@@ -318,6 +330,7 @@ public class BasicComponentListUI extends ComponentListUI {
 		}
 		
 		// Implementation of PropertyChangeListener interface
+		@Override
 		public void
 		propertyChange(PropertyChangeEvent e) {
 			String name = e.getPropertyName();
@@ -332,19 +345,21 @@ public class BasicComponentListUI extends ComponentListUI {
 		}
 		
 		// Implementation of MouseListener interface
+		@Override
 		public void
 		mouseClicked(MouseEvent e) { }
 		
+		@Override
 		public void
 		mouseEntered(MouseEvent e) { }
 		
+		@Override
 		public void
 		mouseExited(MouseEvent e) { }
 		
+		@Override
 		public void
 		mousePressed(MouseEvent e) {
-			ListSelectionModel sm = componentList.getSelectionModel();
-		
 			Component c;
 			if(e.getSource() == listPane) {
 				c = listPane.getComponentAt(e.getX(), e.getY());
@@ -352,55 +367,64 @@ public class BasicComponentListUI extends ComponentListUI {
 				c = (Component)e.getSource();
 			}
 			
-			if(c == null) {
-				if(!listPane.hasFocus() && listPane.isRequestFocusEnabled())
-					listPane.requestFocus();
-				
-				if( (e.isControlDown() || e.isShiftDown()) &&
-				    componentList.getSelectionMode() != sm.SINGLE_SELECTION );
-				else componentList.clearSelection();
-				
-				return;
-			} else if(!c.hasFocus()) c.requestFocus();
-			
-			int idx = -1;
-			
-			for(int i = 0; i < componentList.getModel().getSize(); i++) {
-				if(componentList.getModel().get(i) == c) {
-					idx = i;
-					break;
-				}
-			}
-			
-			if(idx == -1) {
-				if( (e.isControlDown() || e.isShiftDown()) &&
-				    componentList.getSelectionMode() != sm.SINGLE_SELECTION );
-				else componentList.clearSelection();
-				
-				return;
-			}
-			
-			int ai = sm.getAnchorSelectionIndex();
-			
-			if(!e.isControlDown()) {
-				if(!e.isShiftDown()) {
-					componentList.setSelectedComponent(c, false);
-					return;
-				}
-				
-				if(ai != -1) sm.setSelectionInterval(ai, idx);
-				return;
-			}
-			
-			if(e.isShiftDown()) sm.addSelectionInterval(ai, idx);
-			else {
-				if(sm.isSelectedIndex(idx)) sm.removeSelectionInterval(idx, idx);
-				else sm.addSelectionInterval(idx, idx);
-			}	
+			processSelectionEvent(c, e.isControlDown(), e.isShiftDown());	
 		}
 		
+		@Override
 		public void
 		mouseReleased(MouseEvent e) { }
 		///////
+	}
+	
+	@Override
+	public void
+	processSelectionEvent(Component c, boolean controlDown, boolean shiftDown) {
+		ListSelectionModel sm = componentList.getSelectionModel();
+		
+		if(c == null) {
+			if(!listPane.hasFocus() && listPane.isRequestFocusEnabled())
+				listPane.requestFocus();
+			
+			if( (controlDown || shiftDown) &&
+			    componentList.getSelectionMode() != sm.SINGLE_SELECTION );
+			else componentList.clearSelection();
+			
+			return;
+		} else if(!c.hasFocus()) c.requestFocus();
+		
+		int idx = -1;
+		
+		for(int i = 0; i < componentList.getModel().getSize(); i++) {
+			if(componentList.getModel().get(i) == c) {
+				idx = i;
+				break;
+			}
+		}
+		
+		if(idx == -1) {
+			if( (controlDown || shiftDown) &&
+			    componentList.getSelectionMode() != sm.SINGLE_SELECTION );
+			else componentList.clearSelection();
+			
+			return;
+		}
+		
+		int ai = sm.getAnchorSelectionIndex();
+		
+		if(!controlDown) {
+			if(!shiftDown) {
+				componentList.setSelectedComponent(c, false);
+				return;
+			}
+			
+			if(ai != -1) sm.setSelectionInterval(ai, idx);
+			return;
+		}
+		
+		if(shiftDown) sm.addSelectionInterval(ai, idx);
+		else {
+			if(sm.isSelectedIndex(idx)) sm.removeSelectionInterval(idx, idx);
+			else sm.addSelectionInterval(idx, idx);
+		}
 	}
 }

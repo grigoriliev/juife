@@ -1,4 +1,8 @@
-juife CVS HEAD (?)
+CVS HEAD
+  * Implemented multicolumn menu
+  * Some GUI enhancements and code cleanup
+
+juife v0.4a: 2008-12-24
   * Some bugfixes and code cleanup
 
 juife v0.3a: 2006-08-07

@@ -1,7 +1,7 @@
 /*
  *   juife - Java User Interface Framework Extensions
  *
- *   Copyright (C) 2005-2007 Grigor Iliev <grigor@grigoriliev.com>
+ *   Copyright (C) 2005-2008 Grigor Iliev <grigor@grigoriliev.com>
  *
  *   This file is part of juife.
  *
@@ -36,6 +36,7 @@ public class DefaultComponentListModel<C extends Component>
 			extends AbstractListModel implements ComponentListModel<C> {
 	
 	private final Vector<C> list = new Vector<C>();
+	private boolean componentListIsAdjusting = false;
 	
 	/** Creates a new instance of DefaultComponentListModel */
 	public DefaultComponentListModel() {
@@ -47,6 +48,7 @@ public class DefaultComponentListModel<C extends Component>
 	 * @return The component at the specified index.
 	 * @throws ArrayIndexOutOfBoundsException If the index is out of range.
 	 */
+	@Override
 	public C
 	get(int index) { return list.get(index); }
 	
@@ -58,6 +60,7 @@ public class DefaultComponentListModel<C extends Component>
 	 * @param index The requested index.
 	 * @return The value at the specified index.
 	 */
+	@Override
 	public Object
 	getElementAt(int index) { return list.get(index); }
 	
@@ -67,6 +70,7 @@ public class DefaultComponentListModel<C extends Component>
 	 * @param index The position of the new component.
 	 * @throws ArrayIndexOutOfBoundsException  If the index is invalid.
 	 */
+	@Override
 	public void
 	insert(C c, int index) {
 		list.insertElementAt(c, index);
@@ -77,6 +81,7 @@ public class DefaultComponentListModel<C extends Component>
 	 * Adds the specified component at the end of the list.
 	 * @param c The component to be added.
 	 */
+	@Override
 	public void
 	add(C c) {
 		int idx = list.size();
@@ -90,6 +95,7 @@ public class DefaultComponentListModel<C extends Component>
 	 * @param c The component to be stored at the specified position.
 	 * @return The previous component at the specified position.
 	 */
+	@Override
 	public C
 	set(int index, C c) {
 		c = list.set(index, c);
@@ -138,6 +144,7 @@ public class DefaultComponentListModel<C extends Component>
 	 * @return <code>true</code> if the list contained the specified component,
 	 * <code>false</code> otherwise.
 	 */
+	@Override
 	public boolean
 	remove(C c) {
 		int idx = list.indexOf(c);
@@ -154,12 +161,33 @@ public class DefaultComponentListModel<C extends Component>
 	 * @return The removed component.
 	 * @throws ArrayIndexOutOfBoundsException If the index is out of range.
 	 */
+	@Override
 	public C
 	remove(int index) {
 		C c = list.remove(index);
 		fireIntervalRemoved(this, index, index);
 		
 		return c;
+	}
+	
+	/**
+	 * Determines whether there are known upcoming changes to the 
+	 * component list, which should be considered as part of a single action.
+	 */
+	@Override
+	public boolean
+	getComponentListIsAdjusting() {
+		return componentListIsAdjusting;
+	}
+	
+	/**
+	 * Sets whether there are upcoming changes to the 
+	 * component list which should be considered part of a single action.
+	 */
+	@Override
+	public void
+	setComponentListIsAdjusting(boolean b) {
+		componentListIsAdjusting = b;
 	}
 	
 	/**
@@ -176,6 +204,7 @@ public class DefaultComponentListModel<C extends Component>
 	 * Gets the length of the list.
 	 * @return The length of the list.
 	 */
+	@Override
 	public int
 	getSize() { return list.size(); }
 	
@@ -183,6 +212,7 @@ public class DefaultComponentListModel<C extends Component>
 	 * Gets the length of the list.
 	 * @return The length of the list.
 	 */
+	@Override
 	public int
 	size() { return list.size(); }
 }

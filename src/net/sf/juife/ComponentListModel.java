@@ -1,7 +1,7 @@
 /*
  *   juife - Java User Interface Framework Extensions
  *
- *   Copyright (C) 2005-2007 Grigor Iliev <grigor@grigoriliev.com>
+ *   Copyright (C) 2005-2008 Grigor Iliev <grigor@grigoriliev.com>
  *
  *   This file is part of juife.
  *
@@ -63,6 +63,18 @@ public interface ComponentListModel<C extends Component> extends ListModel {
 	public C remove(int index);
 	
 	/**
+	 * Determines whether there are known upcoming changes to the 
+	 * component list, which should be considered as part of a single action.
+	 */
+	public boolean getComponentListIsAdjusting();
+	
+	/**
+	 * Sets whether there are upcoming changes to the 
+	 * component list which should be considered part of a single action.
+	 */
+	public void setComponentListIsAdjusting(boolean b);
+	
+	/**
 	 * Gets the component at the specified index.
 	 * @param index The requested index.
 	 * @return The component at the specified index.
@@ -76,6 +88,18 @@ public interface ComponentListModel<C extends Component> extends ListModel {
 	 * @return The previous component at the specified position.
 	 */
 	public C set(int index, C c);
+	
+	/**
+	 * Moves the specified component one position up in the list.
+	 * @param c The component to be moved up.
+	 */
+	public void moveUp(C c);
+	
+	/**
+	 * Moves the specified component one position down in the list.
+	 * @param c The component to be moved down.
+	 */
+	public void moveDown(C c);
 	
 	/**
 	 * Gets the length of the list.

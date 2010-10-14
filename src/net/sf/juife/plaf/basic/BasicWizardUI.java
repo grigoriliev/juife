@@ -118,8 +118,8 @@ public class BasicWizardUI extends WizardUI {
 		leftPane.setPreferredSize(new Dimension(190, 300));
 		c.gridx = 0;
 		c.gridy = 0;
-		c.fill = GridBagConstraints.BOTH;
-		c.weightx = 1.0;
+		c.fill = GridBagConstraints.VERTICAL;
+		c.weightx = 0.0;
 		c.weighty = 1.0;
 		gridbag.setConstraints(leftPane, c);
 		wizard.add(leftPane); 
@@ -127,6 +127,8 @@ public class BasicWizardUI extends WizardUI {
 		rightPane.setPreferredSize(new Dimension(400, 300));
 		c.gridx = 1;
 		c.gridy = 0;
+		c.weightx = 1.0;
+		c.fill = GridBagConstraints.BOTH;
 		gridbag.setConstraints(rightPane, c);
 		wizard.add(rightPane);
 		
