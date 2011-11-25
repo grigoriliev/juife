@@ -1,7 +1,7 @@
 /*
  *   juife - Java User Interface Framework Extensions
  *
- *   Copyright (C) 2005-2007 Grigor Iliev <grigor@grigoriliev.com>
+ *   Copyright (C) 2005-2011 Grigor Iliev <grigor@grigoriliev.com>
  *
  *   This file is part of juife.
  *
@@ -20,7 +20,7 @@
  *   MA  02110-1301, USA
  */
 
-package net.sf.juife;
+package net.sf.juife.swing;
 
 import java.awt.Dialog;
 import java.awt.Frame;
@@ -33,7 +33,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
-import net.sf.juife.plaf.WizardUI;
+import net.sf.juife.swing.plaf.WizardUI;
 
 import net.sf.juife.wizard.DefaultWizardModel;
 import net.sf.juife.wizard.WizardModel;
@@ -54,7 +54,7 @@ import net.sf.juife.wizard.WizardPage;
 public class Wizard extends JPanel {
 	static {
 		// TODO: In future this must be done the right way
-		UIManager.put("WizardUI", "net.sf.juife.plaf.basic.BasicWizardUI");
+		UIManager.put("WizardUI", "net.sf.juife.swing.plaf.basic.BasicWizardUI");
 	}
 	private static final String uiClassID = "WizardUI";
 	

@@ -20,42 +20,25 @@
  *   MA  02110-1301, USA
  */
 
-package net.sf.juife;
+package net.sf.juife.swing.plaf;
 
-import javax.swing.JPanel;
+import java.awt.Point;
+
+import javax.swing.plaf.ComponentUI;
 
 
 /**
- * This class represents a page that can be displayed in <code>NavigationPane</code>.
+ * Pluggable look and feel interface for <code>Dial</code>.
  * @author Grigor Iliev
  */
-public class NavigationPage extends JPanel {
-	private String title;
-	
-	/** Creates a new instance of <code>NavigationPage</code> with empty title */
-	public
-	NavigationPage() { this(""); }
-	
+public abstract class DialUI extends ComponentUI {
 	/**
-	 * Creates a new instance of <code>NavigationPage</code> with the specified title.
-	 * @param title	The title text.
+	 * Gets the value that the dial knob will have if
+	 * dragging to point <code>p</code> is made in radial mode.
+	 * @param p The point for which the respective dial's value should be obtained.
+	 * @return The value that the dial knob will have if
+	 * dragging to point <code>p</code> is made in radial mode.
+	 * @throws IllegalArgumentException if <code>p</code> is <code>null</code>.
 	 */
-	public
-	NavigationPage(String title) {
-		this.title = title;
-	}
-	
-	/**
-	 * Gets the title of this navigation page.
-	 * @return The title of this navigation page.
-	 */
-	public String
-	getTitle() { return title; }
-	
-	/**
-	 * Sets the title of this navigation page.
-	 * @param title Specifies the title text of this navigation page.
-	 */
-	public void
-	setTitle(String title) { this.title = title; }
+	public abstract int getValueByPoint(Point p);
 }

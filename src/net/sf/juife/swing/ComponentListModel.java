@@ -20,7 +20,7 @@
  *   MA  02110-1301, USA
  */
 
-package net.sf.juife;
+package net.sf.juife.swing;
 
 import javax.swing.ListModel;
 

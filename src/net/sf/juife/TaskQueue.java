@@ -22,9 +22,6 @@
 
 package net.sf.juife;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import java.util.LinkedList;
 import java.util.Vector;
 
@@ -314,7 +311,6 @@ public class TaskQueue {
 	getSerialNumber() { return ++serial; }
 	
 	private final Vector<TaskQueueListener> listenerList = new Vector<TaskQueueListener>();
-	private ActionEvent e = null;
 	
 	/**
 	 * Registers the specified listener for receiving event messages.
@@ -332,7 +328,7 @@ public class TaskQueue {
 	
 	private synchronized void
 	fireTaskQueueEvent(final TaskQueueEvent e) {
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+		PDUtils.runOnUiThread(new Runnable() {
 			public void
 			run() { for(TaskQueueListener l : listenerList) l.stateChanged(e); }
 		});

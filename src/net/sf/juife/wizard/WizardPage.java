@@ -26,8 +26,8 @@ import java.awt.Dialog;
 
 import javax.swing.JPanel;
 
-import net.sf.juife.JuifeUtils;
-import net.sf.juife.Wizard;
+import net.sf.juife.swing.JuifeUtils;
+import net.sf.juife.swing.Wizard;
 
 
 /**

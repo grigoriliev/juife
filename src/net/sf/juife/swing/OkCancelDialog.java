@@ -20,7 +20,7 @@
  *   MA  02110-1301, USA
  */
 
-package net.sf.juife;
+package net.sf.juife.swing;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -30,8 +30,6 @@ import java.awt.Frame;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -43,27 +41,28 @@ import static net.sf.juife.JuifeI18n.i18n;
 
 
 /**
- * This class can be used to simplify the creation of information dialogs
- * with or without 'Close' button.
- * To create a dialog you only need to specify a <code>Container</code>
- * that will be used as a main pane in the dialog.
- * This can be done either by using one of the following constructors to create the dialog
+ * This class can be used to simplify the creation of dialogs with 'OK' and 'Cancel' buttons.
+ * To create a dialog you only need to specify a <code>Container</code> that will be used as
+ * a main pane in the dialog and to implement the
+ * {@link EnhancedDialog#onOk} and {@link EnhancedDialog#onCancel} methods.
+ * The main pane can be set either by using one of
+ * the following constructors to create the dialog
  * <ul>
- *  <li>{@link #InformationDialog(Frame owner, Container mainPane)}
- *  <li>{@link #InformationDialog(Frame owner, String title, Container mainPane)}
- *  <li>{@link #InformationDialog(Frame owner, String title, Container mainPane, boolean modal)}
- *  <li>{@link #InformationDialog(Dialog owner, Container mainPane)}
- *  <li>{@link #InformationDialog(Dialog owner, String title, Container mainPane)}
- *  <li>{@link #InformationDialog(Dialog owner, String title, Container mainPane, boolean modal)}
+ *  <li>{@link #OkCancelDialog(Frame owner, Container mainPane)}
+ *  <li>{@link #OkCancelDialog(Frame owner, String title, Container mainPane)}
+ *  <li>{@link #OkCancelDialog(Frame owner, String title, Container mainPane, boolean modal)}
+ *  <li>{@link #OkCancelDialog(Dialog owner, Container mainPane)}
+ *  <li>{@link #OkCancelDialog(Dialog owner, String title, Container mainPane)}
+ *  <li>{@link #OkCancelDialog(Dialog owner, String title, Container mainPane, boolean modal)}
  * </ul>
  * or by using the {@link #setMainPane} method.
  *
  * @author Grigor Iliev
  */
-public class InformationDialog extends EnhancedDialog {
+public abstract class OkCancelDialog extends EnhancedDialog {
 	private JPanel pane = new JPanel(new BorderLayout());
-	private final JPanel btnPane = new JPanel();
-	private final JButton btnClose = new JButton(i18n.getButtonLabel("close"));
+	protected final JButton btnOk = new JButton(i18n.getButtonLabel("ok"));
+	protected final JButton btnCancel = new JButton(i18n.getButtonLabel("cancel"));
 	
 	/**
 	 * Creates a modal dialog without a title and with the specified
@@ -71,7 +70,7 @@ public class InformationDialog extends EnhancedDialog {
 	 * @param owner Specifies the <code>Frame</code> from which this dialog is displayed.
 	 */
 	public
-	InformationDialog(Frame owner) { this(owner, new Container()); }
+	OkCancelDialog(Frame owner) { this(owner, new Container()); }
 	
 	/**
 	 * Creates a modal dialog with the specified title and owner <code>Frame</code>.
@@ -79,7 +78,7 @@ public class InformationDialog extends EnhancedDialog {
 	 * @param title The text to be displayed in the dialog's title bar.
 	 */
 	public
-	InformationDialog(Frame owner, String title) { this(owner, title, new Container()); }
+	OkCancelDialog(Frame owner, String title) { this(owner, title, new Container()); }
 	
 	/**
 	 * Creates a modal dialog without a title and with the specified owner and main pane.
@@ -89,7 +88,7 @@ public class InformationDialog extends EnhancedDialog {
 	 * @throws IllegalArgumentException If <code>mainPane</code> is <code>null</code>.
 	 */
 	public
-	InformationDialog(Frame owner, Container mainPane) { this(owner, "", mainPane); }
+	OkCancelDialog(Frame owner, Container mainPane) { this(owner, "", mainPane); }
 	
 	/**
 	 * Creates a modal dialog with the specified title, owner and main pane.
@@ -100,7 +99,7 @@ public class InformationDialog extends EnhancedDialog {
 	 * @throws IllegalArgumentException If <code>mainPane</code> is <code>null</code>.
 	 */
 	public
-	InformationDialog(Frame owner, String title, Container mainPane) {
+	OkCancelDialog(Frame owner, String title, Container mainPane) {
 		this(owner, title, mainPane, true);
 	}
 	
@@ -114,15 +113,11 @@ public class InformationDialog extends EnhancedDialog {
 	 * @throws IllegalArgumentException If <code>mainPane</code> is <code>null</code>.
 	 */
 	public
-	InformationDialog(Frame owner, String title, Container mainPane, boolean modal) {
+	OkCancelDialog(Frame owner, String title, Container mainPane, boolean modal) {
 		super(owner, title, modal);
 		
-		initInformationDialog();
+		initOkCancelDialog();
 		setMainPane(mainPane);
-		addWindowListener(new WindowAdapter() {
-			public void
-			windowActivated(WindowEvent e) { btnClose.requestFocusInWindow(); }
-		});
 	}
 	
 	/**
@@ -131,7 +126,7 @@ public class InformationDialog extends EnhancedDialog {
 	 * @param owner Specifies the <code>Dialog</code> from which this dialog is displayed.
 	 */
 	public
-	InformationDialog(Dialog owner) { this(owner, new Container()); }
+	OkCancelDialog(Dialog owner) { this(owner, new Container()); }
 	
 	/**
 	 * Creates a modal dialog with the specified title and owner <code>Dialog</code>.
@@ -139,7 +134,7 @@ public class InformationDialog extends EnhancedDialog {
 	 * @param title The text to be displayed in the dialog's title bar.
 	 */
 	public
-	InformationDialog(Dialog owner, String title) { this(owner, title, new Container()); }
+	OkCancelDialog(Dialog owner, String title) { this(owner, title, new Container()); }
 	
 	/**
 	 * Creates a modal dialog without a title and with the specified owner and main pane.
@@ -149,7 +144,7 @@ public class InformationDialog extends EnhancedDialog {
 	 * @throws IllegalArgumentException If <code>mainPane</code> is <code>null</code>.
 	 */
 	public
-	InformationDialog(Dialog owner, Container mainPane) { this(owner, "", mainPane); }
+	OkCancelDialog(Dialog owner, Container mainPane) { this(owner, "", mainPane); }
 	
 	/**
 	 * Creates a modal dialog with the specified title, owner and main pane.
@@ -160,7 +155,7 @@ public class InformationDialog extends EnhancedDialog {
 	 * @throws IllegalArgumentException If <code>mainPane</code> is <code>null</code>.
 	 */
 	public
-	InformationDialog(Dialog owner, String title, Container mainPane) {
+	OkCancelDialog(Dialog owner, String title, Container mainPane) {
 		this(owner, title, mainPane, true);
 	}
 	
@@ -174,33 +169,57 @@ public class InformationDialog extends EnhancedDialog {
 	 * @throws IllegalArgumentException If <code>mainPane</code> is <code>null</code>.
 	 */
 	public
-	InformationDialog(Dialog owner, String title, Container mainPane, boolean modal) {
+	OkCancelDialog(Dialog owner, String title, Container mainPane, boolean modal) {
 		super(owner, title, modal);
 		
-		initInformationDialog();
+		initOkCancelDialog();
 		setMainPane(mainPane);
 	}
 	
 	/** Used for initial initialization of the dialog */
 	private void
-	initInformationDialog() {
+	initOkCancelDialog() {
 		pane.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
 		
 		add(pane, BorderLayout.CENTER);
 		
-		btnPane.add(btnClose);
+		// Set preferred size for Ok & Cancel buttons
+		Dimension d = JuifeUtils.getUnionSize(btnOk, btnCancel);
+		btnOk.setPreferredSize(d);
+		btnOk.setMaximumSize(d);
+		btnCancel.setPreferredSize(d);
+		btnCancel.setMaximumSize(d);
 		
-		btnPane.setBorder(BorderFactory.createEmptyBorder(6, 0, 0, 0));
+		JPanel btnPane = new JPanel();
+		btnPane.setLayout(new BoxLayout(btnPane, BoxLayout.X_AXIS));
+		btnPane.add(Box.createGlue());
+		btnPane.add(btnOk);
+		btnPane.add(Box.createRigidArea(new Dimension(5, 0)));
+		btnPane.add(btnCancel);
+		
+		btnPane.setBorder(BorderFactory.createEmptyBorder(17, 0, 0, 0));
 		
 		pane.add(btnPane, BorderLayout.SOUTH);
 		
 		pack();
+		setResizable(false);
 		
 		setLocation(JuifeUtils.centerLocation(this, getOwner()));
 		
-		btnClose.addActionListener(new ActionListener() {
+		btnCancel.addActionListener(new ActionListener() {
 			public void
-			actionPerformed(ActionEvent e) { onCancel(); }
+			actionPerformed(ActionEvent e) {
+				setCancelled(true);
+				onCancel();
+			}
+		});
+		
+		btnOk.addActionListener(new ActionListener() {
+			public void
+			actionPerformed(ActionEvent e) {
+				setCancelled(false);
+				onOk();
+			}
 		});
 	}
 	
@@ -219,18 +238,4 @@ public class InformationDialog extends EnhancedDialog {
 		pack();
 		setLocation(JuifeUtils.centerLocation(this, getOwner()));
 	}
-	
-	/**
-	 * Sets whether the 'Close' button should be displayed.
-	 * @param show If <code>true</code> the 'Close' button is displayed else
-	 * the dialog is displayed without 'Close' button.
-	 */
-	public void
-	showCloseButton(boolean show) { btnPane.setVisible(show); }
-	
-	protected void
-	onOk() { }
-	
-	protected void
-	onCancel() { setVisible(false); }
 }

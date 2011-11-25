@@ -21,7 +21,7 @@
  */
 
 
-package net.sf.juife;
+package net.sf.juife.swing;
 
 import java.awt.Window;
 

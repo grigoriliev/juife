@@ -1,7 +1,7 @@
 /*
  *   juife - Java User Interface Framework Extensions
  *
- *   Copyright (C) 2005-2007 Grigor Iliev <grigor@grigoriliev.com>
+ *   Copyright (C) 2005-2011 Grigor Iliev <grigor@grigoriliev.com>
  *
  *   This file is part of juife.
  *
@@ -20,7 +20,7 @@
  *   MA  02110-1301, USA
  */
 
-package net.sf.juife;
+package net.sf.juife.swing;
 
 import java.awt.Component;
 import java.awt.BorderLayout;
@@ -39,7 +39,7 @@ import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import net.sf.juife.plaf.ComponentListUI;
+import net.sf.juife.swing.plaf.ComponentListUI;
 
 
 /**
@@ -59,7 +59,7 @@ import net.sf.juife.plaf.ComponentListUI;
 public class ComponentList extends JPanel {
 	static {
 		// TODO: In future this must be done the right way
-		UIManager.put("ComponentListUI", "net.sf.juife.plaf.basic.BasicComponentListUI");
+		UIManager.put("ComponentListUI", "net.sf.juife.swing.plaf.basic.BasicComponentListUI");
 	}
 	private static final String uiClassID = "ComponentListUI";
 	

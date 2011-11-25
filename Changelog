@@ -1,6 +1,7 @@
 CVS HEAD
   * Implemented multicolumn menu
   * Some GUI enhancements and code cleanup
+  * moved Swing dependent code outside of the base package
 
 juife v0.4a: 2008-12-24
   * Some bugfixes and code cleanup

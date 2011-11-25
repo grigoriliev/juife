@@ -22,8 +22,7 @@
 
 package net.sf.juife;
 
-import javax.swing.SwingUtilities;
-import javax.swing.event.EventListenerList;
+import java.util.ArrayList;
 
 import net.sf.juife.event.TaskEvent;
 import net.sf.juife.event.TaskListener;
@@ -180,7 +179,7 @@ public abstract class AbstractTask<R> implements Task<R>, Runnable {
 		run();
 		setDone(true);
 		
-		try { SwingUtilities.invokeAndWait(new Runnable() {
+		try { PDUtils.runOnUiThreadAndWait(new Runnable() {
 			public void
 			run() { fireTaskPerformed(); }
 		});}
@@ -211,7 +210,7 @@ public abstract class AbstractTask<R> implements Task<R>, Runnable {
 	setResult(R result) { this.result = result; }
 	
 	///////
-	private final EventListenerList listenerList = new EventListenerList();
+	private final ArrayList<TaskListener> listenerList = new ArrayList<TaskListener>();
 	private TaskEvent taskEvent = null;
 	
 	/**
@@ -220,14 +219,14 @@ public abstract class AbstractTask<R> implements Task<R>, Runnable {
 	 * @param l The <code>TaskListener</code> to register.
 	 */
 	public void
-	addTaskListener(TaskListener l) { listenerList.add(TaskListener.class, l); }
+	addTaskListener(TaskListener l) { listenerList.add(l); }
 	
 	/**
 	 * Removes the specified listener.
 	 * @param l The <code>TaskListener</code> to remove.
 	 */
 	public void
-	removeTaskListener(TaskListener l) { listenerList.remove(TaskListener.class, l); }
+	removeTaskListener(TaskListener l) { listenerList.remove(l); }
 	
 	/**
 	 * Notifies listeners that the task has been done.
@@ -235,13 +234,9 @@ public abstract class AbstractTask<R> implements Task<R>, Runnable {
 	 */
 	private void
 	fireTaskPerformed() {
-		Object[] listeners = listenerList.getListenerList();
-		
-		for(int i = listeners.length - 2; i >= 0; i -= 2) {
-			if(listeners[i] == TaskListener.class) {
-				if(taskEvent == null) taskEvent = new TaskEvent(this);
-				((TaskListener)listeners[i+1]).taskPerformed(taskEvent);
-			}
+		for(int i = listenerList.size() - 1; i >= 0; i--) {
+			if(taskEvent == null) taskEvent = new TaskEvent(this);
+			listenerList.get(i).taskPerformed(taskEvent);
 		}
 	}
 }

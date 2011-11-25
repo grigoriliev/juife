@@ -22,12 +22,11 @@
 
 package net.sf.juife;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
+import java.util.ArrayList;
 import java.util.Vector;
 
-import javax.swing.event.EventListenerList;
+import net.sf.juife.event.GenericEvent;
+import net.sf.juife.event.GenericListener;
 
 
 /**
@@ -124,28 +123,28 @@ public class TaskList {
 	getSerialNumber() { return ++serial; }
 	
 	/** A list of event listeners for this <code>TaskList</code>. */
-	protected final EventListenerList listenerList = new EventListenerList();
+	protected final ArrayList<GenericListener> listenerList = new ArrayList<GenericListener>();
 	
 	/**
-	 * Registers the specified <code>ActionListener</code> to be
+	 * Registers the specified <code>GenericListener</code> to be
 	 * notified when all tasks in the list are done.
-	 * @param l The <code>ActionListener</code> to register.
+	 * @param l The <code>GenericListener</code> to register.
 	 */
 	public void
-	addActionListener(ActionListener l) { listenerList.add(ActionListener.class, l); }
+	addListener(GenericListener l) { listenerList.add(l); }
 	
 	/**
 	 * Removes the specified listener.
-	 * @param l The <code>ActionListener</code> to remove.
+	 * @param l The <code>GenericListener</code> to remove.
 	 */
 	public void
-	removeActionListener(ActionListener l) { listenerList.remove(ActionListener.class, l); }
+	removeActionListener(GenericListener l) { listenerList.remove(l); }
 	
 	/** Notifies registered listeners that the history list has changed. */
 	private void
 	fireActionPerformed() {
 		try {
-			javax.swing.SwingUtilities.invokeAndWait(new Runnable() {
+			PDUtils.runOnUiThreadAndWait(new Runnable() {
 				public void
 				run() { fireActionPerformed0(); }
 			});
@@ -158,14 +157,9 @@ public class TaskList {
 	 */
 	private void
 	fireActionPerformed0() {
-		Object[] listeners = listenerList.getListenerList();
-		
-		ActionEvent e = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "finish");
-		
-		for(int i = listeners.length - 2; i >= 0; i -= 2) {
-			if(listeners[i] == ActionListener.class) {
-				((ActionListener)listeners[i+1]).actionPerformed(e);
-			}
+		GenericEvent e = new GenericEvent(this);
+		for(int i = listenerList.size() - 1; i >= 0; i--) {
+			listenerList.get(i).jobDone(e);
 		}
 	}
 }

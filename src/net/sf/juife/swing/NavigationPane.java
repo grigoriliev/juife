@@ -1,7 +1,7 @@
 /*
  *   juife - Java User Interface Framework Extensions
  *
- *   Copyright (C) 2005-2007 Grigor Iliev <grigor@grigoriliev.com>
+ *   Copyright (C) 2005-2011 Grigor Iliev <grigor@grigoriliev.com>
  *
  *   This file is part of juife.
  *
@@ -20,7 +20,7 @@
  *   MA  02110-1301, USA
  */
 
-package net.sf.juife;
+package net.sf.juife.swing;
 
 
 import java.awt.Color;
@@ -35,7 +35,7 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 
-import net.sf.juife.plaf.NavigationPaneUI;
+import net.sf.juife.swing.plaf.NavigationPaneUI;
 
 
 /**
@@ -45,7 +45,7 @@ import net.sf.juife.plaf.NavigationPaneUI;
 public class NavigationPane extends JPanel {
 	static {
 		// TODO: In future this must be done the right way
-		UIManager.put("NavigationPaneUI", "net.sf.juife.plaf.basic.BasicNavigationPaneUI");
+		UIManager.put("NavigationPaneUI", "net.sf.juife.swing.plaf.basic.BasicNavigationPaneUI");
 	}
 	private static final String uiClassID = "NavigationPaneUI";
 	

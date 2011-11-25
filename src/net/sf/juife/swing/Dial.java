@@ -1,7 +1,7 @@
 /*
  *   juife - Java User Interface Framework Extensions
  *
- *   Copyright (C) 2005-2007 Grigor Iliev <grigor@grigoriliev.com>
+ *   Copyright (C) 2005-2011 Grigor Iliev <grigor@grigoriliev.com>
  *
  *   This file is part of juife.
  *
@@ -20,7 +20,7 @@
  *   MA  02110-1301, USA
  */
 
-package net.sf.juife;
+package net.sf.juife.swing;
 
 import javax.swing.BoundedRangeModel;
 import javax.swing.DefaultBoundedRangeModel;
@@ -31,7 +31,7 @@ import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import net.sf.juife.plaf.DialUI;
+import net.sf.juife.swing.plaf.DialUI;
 
 
 /**
@@ -41,7 +41,7 @@ import net.sf.juife.plaf.DialUI;
 public class Dial extends JComponent {
 	static {
 		// TODO: In future this must be done the right way
-		UIManager.put("DialUI", "net.sf.juife.plaf.basic.BasicDialUI");
+		UIManager.put("DialUI", "net.sf.juife.swing.plaf.basic.BasicDialUI");
 	}
 	
 	private static final String uiClassID = "DialUI";
