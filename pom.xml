@@ -1,0 +1,109 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.grigoriliev.jsampler</groupId>
+	<artifactId>juife</artifactId>
+	<version>0.4-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>${project.groupId}:${project.artifactId}</name>
+
+	<description>
+		juife - Java User Interface Framework Extensions
+	</description>
+
+	<url>https://github.com/grigoriliev/juife</url>
+
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<developers>
+		<developer>
+			<name>Grigor Iliev</name>
+			<email>grigor@grigoriliev.com</email>
+			<organizationUrl>https://www.grigoriliev.com</organizationUrl>
+		</developer>
+	</developers>
+
+	<licenses>
+		<license>
+			<name>GNU Lesser General Public License, version 2.1</name>
+			<url>https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html</url>
+		</license>
+	</licenses>
+
+	<scm>
+		<connection>scm:git:git://github.com/grigoriliev/juife.git</connection>
+		<developerConnection>scm:git:ssh://github.com/grigoriliev/juife.git</developerConnection>
+		<url>https://github.com/grigoriliev/juife/tree/master</url>
+	</scm>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.10.1</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.3.0</version>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Specification-Title>
+								Java User Interface Framework Extensions
+							</Specification-Title>
+							<Specification-Version>${project.version}</Specification-Version>
+							<Specification-Vendor>Grigor Iliev</Specification-Vendor>
+							<Implementation-Title>net.sf.juife</Implementation-Title>
+							<Implementation-Version>${project.version}</Implementation-Version>
+							<Implementation-Vendor>Grigor Iliev</Implementation-Vendor>
+						</manifestEntries>
+					</archive>
+					<excludes>
+						<exclude>android/**</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>3.2.1</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.5.0</version>
+				<configuration>
+					<doclint>none</doclint>
+					<author>false</author>
+					<splitindex>true</splitindex>
+					<windowtitle>juife ${project.version} API specification</windowtitle>
+					<overview>${project.basedir}/src/main/java/overview.html</overview>
+					<doctitle>juife ${project.version} API specification</doctitle>
+					<header><![CDATA[<b>juife</b><br><font size=-1>v${project.version}</font>]]></header>
+					<bottom><![CDATA[<font size=-1>Copyright &copy; 2023 Grigor Iliev. All rights reserved.</font>]]></bottom>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.12.1</version>
+			</plugin>
+		</plugins>
+	</build>
+
+	<distributionManagement>
+		<site>
+			<id>${project.artifactId}-site</id>
+			<url>http://jsampler.grigoriliev.com/juife/</url>
+		</site>
+	</distributionManagement>
+</project>
+
