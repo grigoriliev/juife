@@ -30,5 +30,5 @@ public interface GenericListener extends java.util.EventListener {
 	/**
 	 * Invoked to indicate that a generic event has been done.
 	 */
-	public void jobDone(GenericEvent e);
+	void jobDone(GenericEvent e);
 }

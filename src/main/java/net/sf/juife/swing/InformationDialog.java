@@ -25,7 +25,6 @@ package net.sf.juife.swing;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dialog;
-import java.awt.Dimension;
 import java.awt.Frame;
 
 import java.awt.event.ActionEvent;
@@ -34,8 +33,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -61,7 +58,7 @@ import static net.sf.juife.JuifeI18n.i18n;
  * @author Grigor Iliev
  */
 public class InformationDialog extends EnhancedDialog {
-	private JPanel pane = new JPanel(new BorderLayout());
+	private final JPanel pane = new JPanel(new BorderLayout());
 	private final JPanel btnPane = new JPanel();
 	private final JButton btnClose = new JButton(i18n.getButtonLabel("close"));
 	

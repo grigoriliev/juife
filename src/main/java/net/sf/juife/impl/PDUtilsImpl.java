@@ -27,11 +27,11 @@ public interface PDUtilsImpl {
 	 * Causes <code>r.run()</code> to be executed asynchronously on the UI thread.
 	 * This call returns immediately.
 	 */
-	public void runOnUiThread(Runnable r);
+	void runOnUiThread(Runnable r);
 	
 	/**
 	 * Causes <code>r.run()</code> to be executed synchronously on the UI thread.
 	 * This call blocks until <code>r.run()</code> returns.
 	 */
-	public void runOnUiThreadAndWait(Runnable r) throws Exception;
+	void runOnUiThreadAndWait(Runnable r) throws Exception;
 }

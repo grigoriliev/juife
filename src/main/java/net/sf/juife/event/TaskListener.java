@@ -32,5 +32,5 @@ public interface TaskListener extends java.util.EventListener {
 	 * Invoked to indicate that the task has been done.
 	 * This method is invoked only from the event-dispatching thread.
 	 */
-	public void taskPerformed(TaskEvent e);
+	void taskPerformed(TaskEvent e);
 }

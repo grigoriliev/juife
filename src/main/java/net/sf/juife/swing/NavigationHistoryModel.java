@@ -38,14 +38,13 @@ public interface NavigationHistoryModel<P> {
 	 * notified about changes of the history list.
 	 * @param l The <code>ActionListener</code> to register.
 	 */
-	public void addActionListener(ActionListener l);
+	void addActionListener(ActionListener l);
 	
 	/**
 	 * Removes the specified listener.
 	 * @param l The <code>ActionListener</code> to remove.
 	 */
-	public void
-	removeActionListener(ActionListener l);
+	void removeActionListener(ActionListener l);
 	
 	/**
 	 * Adds the specified page to the history list after the current page.
@@ -53,7 +52,7 @@ public interface NavigationHistoryModel<P> {
 	 * the added page becomes current.
 	 * @param page The page to be added to the history list.
 	 */
-	public void addPage(P page);
+	void addPage(P page);
 	
 	/**
 	 * Goes to the previous page in the history list.
@@ -62,7 +61,7 @@ public interface NavigationHistoryModel<P> {
 	 * there is no previous page in the history list.
 	 * @see #hasBack
 	 */
-	public P goBack();
+	P goBack();
 	
 	/**
 	 * Determines whether there is at least one
@@ -70,7 +69,7 @@ public interface NavigationHistoryModel<P> {
 	 * @return <code>true</code> if there is at least one page before
 	 * the current page in the history list, <code>false</code> otherwise.
 	 */
-	public boolean hasBack();
+	boolean hasBack();
 	
 	
 	/**
@@ -80,7 +79,7 @@ public interface NavigationHistoryModel<P> {
 	 * there is no next page in the history list.
 	 * @see #hasForward
 	 */
-	public P goForward();
+	P goForward();
 	
 	/**
 	 * Determines whether there is at least one
@@ -88,33 +87,33 @@ public interface NavigationHistoryModel<P> {
 	 * @return <code>true</code> if there is at least one page after
 	 * the current page in the history list, <code>false</code> otherwise.
 	 */
-	public boolean hasForward();
+	boolean hasForward();
 	
 	/**
 	 * Goes to the first page in the history list.
 	 * This means that the first page becomes the current page of the history list.
 	 */
-	public void goFirst();
+	void goFirst();
 	
 	/**
 	 * Goes to the last page in the history list.
 	 * This means that the last page becomes the current page of the history list.
 	 */
-	public void goLast();
+	void goLast();
 	
 	/**
 	 * Gets the current page in the history list.
 	 * @return The current page in the history list or
 	 * <code>null</code> if the history list is empty.
 	 */
-	public P getCurrentPage();
+	P getCurrentPage();
 	
 	/**
 	 * Gets the current number of pages in the history list.
 	 * @return The current number of pages in the history list.
 	 */
-	public int getPageCount();
+	int getPageCount();
 	
 	/** Removes all pages from history list except the current page. */
-	public void clearHistory();
+	void clearHistory();
 }

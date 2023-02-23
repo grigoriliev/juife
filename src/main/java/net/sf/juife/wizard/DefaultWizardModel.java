@@ -189,7 +189,7 @@ public class DefaultWizardModel extends AbstractWizardModel {
 	 */
 	public String[]
 	getSteps() {
-		return steps == null ? null : steps.toArray(new String[steps.size()]);
+		return steps == null ? null : steps.toArray(new String[0]);
 	}
 	
 	/**

@@ -22,10 +22,6 @@
 
 package net.sf.juife;
 
-import java.text.MessageFormat;
-import java.util.Locale;
-import java.util.ResourceBundle;
-
 
 /**
  * The <code>JuifeI18n</code> class manages the locale-specific data of this library.

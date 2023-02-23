@@ -43,7 +43,7 @@ public class WizardPage extends JPanel {
 	private Wizard wizard = null;
 	
 	/** Represents the type of a wizard page. */
-	public static enum Type {
+	public enum Type {
 		/** Represents an overview page. */
 		OVERVIEW_PAGE,
 		
@@ -83,7 +83,7 @@ public class WizardPage extends JPanel {
 	 * Represents the optional buttons to be shown
 	 * in the wizard when the page becomes current.
 	 */
-	public static enum OptionalButtons {
+	public enum OptionalButtons {
 		/** Indicates that none of the optional buttons will be shown. */
 		NONE,
 		

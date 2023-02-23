@@ -31,7 +31,6 @@ import java.beans.PropertyChangeListener;
 import java.util.Vector;
 
 import javax.swing.DefaultListSelectionModel;
-import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
@@ -402,7 +401,7 @@ public class ComponentList extends JPanel {
 	/**
 	 * Determines whether the component list should be automatically updated
 	 * when component is added/removed. The default value is <code>true</code>.
-	 * @see updateList
+	 * @see #updateList()
 	 */
 	public boolean
 	getAutoUpdate() { return autoUpdate; }
@@ -410,14 +409,14 @@ public class ComponentList extends JPanel {
 	/**
 	 * Determines whether the component list should be automatically updated
 	 * when component is added/removed.
-	 * @see updateList
+	 * @see #updateList()
 	 */
 	public void
 	setAutoUpdate(boolean b) { autoUpdate = b; }
 	
 	/**
 	 * Updates the component list UI.
-	 * @see setAutoUpdate
+	 * @see #setAutoUpdate(boolean)
 	 */
 	public void
 	updateList() { getUI().updateList(); }

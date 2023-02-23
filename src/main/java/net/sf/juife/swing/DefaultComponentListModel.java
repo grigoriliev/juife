@@ -191,10 +191,10 @@ public class DefaultComponentListModel<C extends Component>
 	}
 	
 	/**
-	 * Gets the index of the first occurence of the given argument, testing
+	 * Gets the index of the first occurrence of the given argument, testing
 	 * for equality using the <code>equals</code> method.
 	 * @param o An object.
-	 * @return The index of the first occurence of the given argument or -1
+	 * @return The index of the first occurrence of the given argument or -1
 	 * if the object is not found.
 	 */
 	public int

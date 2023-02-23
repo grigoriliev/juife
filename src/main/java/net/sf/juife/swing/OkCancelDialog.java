@@ -60,7 +60,7 @@ import static net.sf.juife.JuifeI18n.i18n;
  * @author Grigor Iliev
  */
 public abstract class OkCancelDialog extends EnhancedDialog {
-	private JPanel pane = new JPanel(new BorderLayout());
+	private final JPanel pane = new JPanel(new BorderLayout());
 	protected final JButton btnOk = new JButton(i18n.getButtonLabel("ok"));
 	protected final JButton btnCancel = new JButton(i18n.getButtonLabel("cancel"));
 	

@@ -22,7 +22,6 @@
 
 package net.sf.juife.wizard;
 
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JEditorPane;
 

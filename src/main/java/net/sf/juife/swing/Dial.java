@@ -47,7 +47,7 @@ public class Dial extends JComponent {
 	private static final String uiClassID = "DialUI";
 	
 	/** Represents how the mouse dragging affects the dial's value. */
-	public static enum MouseHandlerMode {
+	public enum MouseHandlerMode {
 		/**
 		 * Indicates that the dial's value will be increased
 		 * when dragging from left to right and will be decreased
@@ -113,7 +113,7 @@ public class Dial extends JComponent {
 	 */
 	protected BoundedRangeModel dialModel;
 	
-	private ChangeListener changeListener;
+	private final ChangeListener changeListener;
 	private ImageIcon pixmap = null;
 	private ImageIcon disabledPixmap = null;
 	private ImageIcon rolloverPixmap = null;
@@ -449,7 +449,7 @@ public class Dial extends JComponent {
 	public int
 	getValueByPoint(java.awt.Point p) { return getUI().getValueByPoint(p); }
 	
-	private ChangeEvent changeEvent = new ChangeEvent(this);
+	private final ChangeEvent changeEvent = new ChangeEvent(this);
 	
 	/**
 	 * Sends a ChangeEvent whose source is this Dial.

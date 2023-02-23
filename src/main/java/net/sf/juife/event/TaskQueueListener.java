@@ -31,5 +31,5 @@ public interface TaskQueueListener {
 	 * Invoked to indicate that the state of a task queue is changed.
 	 * This method is invoked only from the event-dispatching thread.
 	 */
-	public void stateChanged(TaskQueueEvent e);
+	void stateChanged(TaskQueueEvent e);
 }

@@ -47,7 +47,6 @@ import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
-import javax.swing.LookAndFeel;
 
 import javax.swing.border.EtchedBorder;
 
@@ -71,7 +70,7 @@ public class BasicNavigationPaneUI extends NavigationPaneUI {
 	private static Icon iconForward = null;
 	private static Icon iconDown = null;
 	
-	private JLabel lTitle = new JLabel();
+	private final JLabel lTitle = new JLabel();
 	private JPanel tiltePane;
 	private JButton btnBack;
 	private JButton btnForward;
@@ -180,7 +179,7 @@ public class BasicNavigationPaneUI extends NavigationPaneUI {
 					return;
 				}
 				
-				if((e.getModifiers() & e.CTRL_MASK) == e.CTRL_MASK) {
+				if((e.getModifiers() & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK) {
 					navigationPane.getModel().goFirst();
 				} else {
 					navigationPane.getModel().goBack();
@@ -197,7 +196,7 @@ public class BasicNavigationPaneUI extends NavigationPaneUI {
 					Logger.getLogger("net.sf.juife").info(s); 
 				}
 				
-				if((e.getModifiers() & e.CTRL_MASK) == e.CTRL_MASK) {
+				if((e.getModifiers() & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK) {
 					navigationPane.getModel().goLast();
 				} else {
 					navigationPane.getModel().goForward();

@@ -24,7 +24,6 @@ package net.sf.juife.swing;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Insets;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;

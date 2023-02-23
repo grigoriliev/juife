@@ -37,56 +37,56 @@ public interface Task<R> {
 	 * Registers the specified listener for receiving event messages.
 	 * @param l The <code>TaskListener</code> to register.
 	 */
-	public void addTaskListener(TaskListener l);
+	void addTaskListener(TaskListener l);
 	
 	/**
 	 * Removes the specified listener.
 	 * @param l The <code>TaskListener</code> to remove.
 	 */
-	public void removeTaskListener(TaskListener l);
+	void removeTaskListener(TaskListener l);
 	
 	/**
 	 * Determines whether the task has finished execution.
 	 * @return <code>true</code> if the task has finished execution,
 	 * <code>false</code> otherwise.
 	 */
-	public boolean done();
+	boolean done();
 	
 	/**
 	 * Determines whether the task has finished its execution successfully.
 	 * @return <code>true</code> if the task has <b>not</b> finished its
 	 * execution successfully; <code>false</code> otherwise
 	 */
-	public boolean doneWithErrors();
+	boolean doneWithErrors();
 	
 	/**
 	 * Gets an appropriate error code identifying the failure of the task.
 	 * @return An appropriate error code identifying the error.
 	 * @see #doneWithErrors
 	 */
-	public int getErrorCode();
+	int getErrorCode();
 	
 	/**
 	 * Gets an appropriate error message when the task fails.
 	 * @return An appropriate error message describing the failure of the task.
 	 * @see #doneWithErrors
 	 */
-	public String getErrorMessage();
+	String getErrorMessage();
 	
 	/** Gets a a detailed error information. */
-	public String getErrorDetails();
+	String getErrorDetails();
 	
 	/**
 	 * Gets the result of the task execution.
 	 * @return <code>R</code> instance providing the result of the task execution.
 	 */
-	public R getResult();
+	R getResult();
 	
 	/**
 	 * Gets a short description about this task.
 	 * @return An arbitrary text describing this task.
 	 */
-	public String getDescription();
+	String getDescription();
 	
 	/**
 	 * Starts the execution of this task. This method returns immediately after the
@@ -95,7 +95,7 @@ public interface Task<R> {
 	 * @throws IllegalStateException if the task has been started already.
 	 * @see #invokeAndWait
 	 */
-	public void invoke();
+	void invoke();
 	
 	/**
 	 * Starts the execution of this task.
@@ -105,27 +105,27 @@ public interface Task<R> {
 	 * @throws IllegalStateException if the task has been started already.
 	 * @see #invoke
 	 */
-	public void invokeAndWait();
+	void invokeAndWait();
 	
 	/**
 	 * Determines whether the task has been started.
 	 * @return <code>true</code> if the task is already started and <code>false</code>
 	 * if the task is not started yet.
 	 */
-	public boolean isStarted();
+	boolean isStarted();
 	
 	/**
 	 * Gets the title of this task.
 	 * @return The title of this task.
 	 */
-	public String getTitle();
+	String getTitle();
 	
 	/**
 	 * Sets the title of this task.
 	 * @param title Specifies the title text of this task.
 	 */
-	public void setTitle(String title);
+	void setTitle(String title);
 	
 	/** Terminates the execution of this task */
-	public void stop();
+	void stop();
 }

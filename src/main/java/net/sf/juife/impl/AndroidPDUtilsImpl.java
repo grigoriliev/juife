@@ -51,7 +51,7 @@ public class AndroidPDUtilsImpl implements PDUtilsImpl {
 				try { r.run(); }
 				catch(Throwable t) { t.printStackTrace(); }
 				
-				synchronized(this) { this.notify(); };
+				synchronized(this) { this.notify(); }
 			}
 		};
 		

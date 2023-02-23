@@ -22,17 +22,9 @@
 
 package net.sf.juife.swing;
 
-
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.MediaTracker;
-import java.awt.event.KeyEvent;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 
 import net.sf.juife.swing.plaf.NavigationPaneUI;

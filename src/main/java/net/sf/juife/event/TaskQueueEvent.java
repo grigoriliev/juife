@@ -28,7 +28,7 @@ package net.sf.juife.event;
  */
 public class TaskQueueEvent extends java.util.EventObject {
 	/** Represents the <code>TaskQueueEvent</code> type. */
-	public static enum ID {
+	public enum ID {
 		/** Indicates that the task queue is started. */
 		STARTED,
 		
@@ -60,7 +60,7 @@ public class TaskQueueEvent extends java.util.EventObject {
 		TASK_DONE
 	}
 	
-	private ID eventID;
+	private final ID eventID;
 	
 	/**
 	 * Creates a new instance of <code>TaskQueueEvent</code>.

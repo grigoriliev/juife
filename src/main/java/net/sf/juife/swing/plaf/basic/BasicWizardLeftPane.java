@@ -22,9 +22,7 @@
 
 package net.sf.juife.swing.plaf.basic;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
+import java.awt.*;
 
 import java.util.Vector;
 
@@ -46,13 +44,13 @@ import static net.sf.juife.JuifeI18n.i18n;
  * @author Grigor Iliev
  */
 public class BasicWizardLeftPane extends JPanel {
-	private JLabel lSteps = new JLabel(i18n.getLabel("lSteps"));
-	private JPanel stepsPane = new JPanel();
+	private final JLabel lSteps = new JLabel(i18n.getLabel("lSteps"));
+	private final JPanel stepsPane = new JPanel();
 	
-	private JScrollPane spSteps;
+	private final JScrollPane spSteps;
 	
 	private Color fgColor = lSteps.getForeground();
-	private Vector<JComponent> comps = new Vector<JComponent>();
+	private final Vector<JComponent> comps = new Vector<JComponent>();
 	
 	
 	/** Creates new instance of <code>BasicWizardLeftPane</code>. */
@@ -123,8 +121,8 @@ public class BasicWizardLeftPane extends JPanel {
 		p.setAlignmentX(LEFT_ALIGNMENT);
 		p.setLayout(new BoxLayout(p, BoxLayout.X_AXIS));
 		
-		JLabel lNum = new JLabel(String.valueOf(index) + ".");
-		lNum.setAlignmentY(lNum.TOP_ALIGNMENT);
+		JLabel lNum = new JLabel(index + ".");
+		lNum.setAlignmentY(TOP_ALIGNMENT);
 		lNum.setForeground(getForegroundColor());
 		p.add(lNum);
 		comps.add(lNum);
@@ -132,7 +130,7 @@ public class BasicWizardLeftPane extends JPanel {
 		p.add(Box.createRigidArea(new Dimension(6, 0)));
 		
 		JTextArea txtDesc = new JTextArea(title);
-		txtDesc.setAlignmentY(lNum.TOP_ALIGNMENT);
+		txtDesc.setAlignmentY(TOP_ALIGNMENT);
 		txtDesc.setMaximumSize(new Dimension(30000, txtDesc.getPreferredSize().width));
 		txtDesc.setLineWrap(true);
 		txtDesc.setWrapStyleWord(true);

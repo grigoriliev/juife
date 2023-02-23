@@ -281,7 +281,7 @@ public class TaskQueue {
 	 * @return An array containing all tasks pending for execution.
 	 */
 	public synchronized Task[]
-	getPendingTasks() { return taskQueue.toArray(new Task[taskQueue.size()]); }
+	getPendingTasks() { return taskQueue.toArray(new Task[0]); }
 	
 	/**
 	 * Gets the currently running task.

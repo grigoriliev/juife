@@ -35,15 +35,13 @@ public interface WizardModel {
 	 * notified when the current page is changed.
 	 * @param l The <code>ActionListener</code> to register.
 	 */
-	public void
-	addActionListener(ActionListener l);
+	void addActionListener(ActionListener l);
 	
 	/**
 	 * Removes the specified listener.
 	 * @param l The <code>ActionListener</code> to remove.
 	 */
-	public void
-	removeActionListener(ActionListener l);	
+	void removeActionListener(ActionListener l);
 	
 	/**
 	 * Determines whether there is a next page in this wizard.
@@ -51,14 +49,14 @@ public interface WizardModel {
 	 * <code>false</code> otherwise.
 	 * @see #next
 	 */
-	public boolean hasNext();
+	boolean hasNext();
 	
 	/**
 	 * Moves to the next page in the wizard.
 	 * @return The next page in the wizard.
 	 * @see #hasNext
 	 */
-	public WizardPage next();
+	WizardPage next();
 	
 	/**
 	 * Determines whether there is a previous page in this wizard.
@@ -66,14 +64,14 @@ public interface WizardModel {
 	 * <code>false</code> otherwise.
 	 * @see #previous
 	 */
-	public boolean hasPrevious();
+	boolean hasPrevious();
 	
 	/**
 	 * Moves to the previous page in the wizard.
 	 * @return The previous page in the wizard.
 	 * @see #hasPrevious
 	 */
-	public WizardPage previous();
+	WizardPage previous();
 	
 	/**
 	 * Determines whether the last page is specified.
@@ -82,7 +80,7 @@ public interface WizardModel {
 	 * <code>false</code> otherwise.
 	 * @see #last
 	 */
-	public boolean hasLast();
+	boolean hasLast();
 	
 	/**
 	 * Moves to the last page in the wizard.
@@ -91,25 +89,25 @@ public interface WizardModel {
 	 * @return The page specified as last in the wizard.
 	 * @see #hasLast
 	 */
-	public WizardPage last();
+	WizardPage last();
 	
 	/**
 	 * Gets the current page.
 	 * @return The current page or <code>null</code> if there isn't current page yet.
 	 */
-	public WizardPage getCurrentPage();
+	WizardPage getCurrentPage();
 	
 	/**
 	 * Gets a <code>String</code> array providing the current list of steps.
 	 * @return A <code>String</code> array providing the current list of steps or
 	 * <code>null</code> if the list of steps is not available.
 	 */
-	public String[] getSteps();
+	String[] getSteps();
 	
 	/**
 	 * Gets the current step in the wizard.
 	 * @return The current step in the wizard or
 	 * <code>null</code> if there is no current step.
 	 */
-	public String getCurrentStep();
+	String getCurrentStep();
 }

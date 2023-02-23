@@ -27,12 +27,8 @@ import java.awt.Font;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-
-
 
 /**
  * Provides default implementation of typical user-input page.

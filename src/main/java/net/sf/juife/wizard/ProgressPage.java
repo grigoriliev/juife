@@ -47,8 +47,8 @@ public class ProgressPage extends WizardPage {
 	private JPanel mainInstructionsPane = null;
 	private JLabel lMainInstructions = null;
 	
-	private JPanel additionalInstructionsPane = new JPanel();
-	private JLabel lAdditionalInstructions = new JLabel();
+	private final JPanel additionalInstructionsPane = new JPanel();
+	private final JLabel lAdditionalInstructions = new JLabel();
 	
 	
 	/**
