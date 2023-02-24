@@ -22,8 +22,6 @@
 
 package net.sf.juife.impl;
 
-import javax.swing.SwingUtilities;
-
 public class DefaultPDUtilsImpl implements PDUtilsImpl {
 	/**
 	 * Causes <code>r.run()</code> to be executed asynchronously on the UI thread.
@@ -31,7 +29,13 @@ public class DefaultPDUtilsImpl implements PDUtilsImpl {
 	 */
 	public void
 	runOnUiThread(Runnable r) {
-		SwingUtilities.invokeLater(r);
+		try {
+			Class.forName("javax.swing.SwingUtilities")
+				.getMethod("invokeLater", Runnable.class)
+				.invoke(null, r);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 	/**
@@ -40,6 +44,12 @@ public class DefaultPDUtilsImpl implements PDUtilsImpl {
 	 */
 	public void
 	runOnUiThreadAndWait(Runnable r) throws Exception {
-		SwingUtilities.invokeAndWait(r);
+		try {
+			Class.forName("javax.swing.SwingUtilities")
+				.getMethod("invokeAndWait", Runnable.class)
+				.invoke(null, r);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 }
