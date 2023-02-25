@@ -20,12 +20,12 @@
  *   MA  02110-1301, USA
  */
 
-package net.sf.juife;
+package com.grigoriliev.jsampler.juife;
 
 import java.util.ArrayList;
 
-import net.sf.juife.event.TaskEvent;
-import net.sf.juife.event.TaskListener;
+import com.grigoriliev.jsampler.juife.event.TaskEvent;
+import com.grigoriliev.jsampler.juife.event.TaskListener;
 
 /**
  * Provides default implementation of the <code>Task</code> interface.
@@ -43,7 +43,7 @@ public abstract class AbstractTask<R> implements Task<R>, Runnable {
 	private boolean isDone = false;
 	private boolean started = false;
 	private boolean doneWithErrors = false;
-	private String title = "net.sf.juife.AbstractTask";
+	private String title = "com.grigoriliev.jsampler.juife.AbstractTask";
 	private String desc = null;
 	
 	private R result = null;

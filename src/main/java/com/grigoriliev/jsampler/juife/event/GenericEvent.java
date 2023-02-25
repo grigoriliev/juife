@@ -20,18 +20,17 @@
  *   MA  02110-1301, USA
  */
 
-package net.sf.juife.impl;
+package com.grigoriliev.jsampler.juife.event;
 
-public interface PDUtilsImpl {
+/**
+ * A semantic event which indicates that a generic event has been done.
+ * @author  Grigor Iliev
+ */
+public class GenericEvent extends java.util.EventObject {
 	/**
-	 * Causes <code>r.run()</code> to be executed asynchronously on the UI thread.
-	 * This call returns immediately.
+	 * Constructs a <code>GenericEvent</code> object.
+	 * @param source The object that originated the event.
 	 */
-	void runOnUiThread(Runnable r);
-	
-	/**
-	 * Causes <code>r.run()</code> to be executed synchronously on the UI thread.
-	 * This call blocks until <code>r.run()</code> returns.
-	 */
-	void runOnUiThreadAndWait(Runnable r) throws Exception;
+	public
+	GenericEvent(Object source) { super(source); }
 }

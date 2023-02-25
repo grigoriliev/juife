@@ -20,7 +20,7 @@
  *   MA  02110-1301, USA
  */
 
-package net.sf.juife;
+package com.grigoriliev.jsampler.juife;
 
 import java.text.MessageFormat;
 import java.util.Locale;

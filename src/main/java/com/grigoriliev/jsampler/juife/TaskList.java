@@ -20,13 +20,13 @@
  *   MA  02110-1301, USA
  */
 
-package net.sf.juife;
+package com.grigoriliev.jsampler.juife;
 
 import java.util.ArrayList;
 import java.util.Vector;
 
-import net.sf.juife.event.GenericEvent;
-import net.sf.juife.event.GenericListener;
+import com.grigoriliev.jsampler.juife.event.GenericListener;
+import com.grigoriliev.jsampler.juife.event.GenericEvent;
 
 
 /**

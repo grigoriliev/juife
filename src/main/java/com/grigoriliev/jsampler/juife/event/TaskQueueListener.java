@@ -1,7 +1,7 @@
 /*
  *   juife - Java User Interface Framework Extensions
  *
- *   Copyright (C) 2011 Grigor Iliev <grigor@grigoriliev.com>
+ *   Copyright (C) 2005-2007 Grigor Iliev <grigor@grigoriliev.com>
  *
  *   This file is part of juife.
  *
@@ -20,17 +20,16 @@
  *   MA  02110-1301, USA
  */
 
-package net.sf.juife.event;
+package com.grigoriliev.jsampler.juife.event;
 
 /**
- * A semantic event which indicates that a generic event has been done.
- * @author  Grigor Iliev
+ * The listener interface that is notified when the state of a task queue is changed.
+ * @author Grigor Iliev
  */
-public class GenericEvent extends java.util.EventObject {
+public interface TaskQueueListener {
 	/**
-	 * Constructs a <code>GenericEvent</code> object.
-	 * @param source The object that originated the event.
+	 * Invoked to indicate that the state of a task queue is changed.
+	 * This method is invoked only from the event-dispatching thread.
 	 */
-	public
-	GenericEvent(Object source) { super(source); }
+	void stateChanged(TaskQueueEvent e);
 }

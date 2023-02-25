@@ -20,7 +20,9 @@
  *   MA  02110-1301, USA
  */
 
-package net.sf.juife.event;
+package com.grigoriliev.jsampler.juife.event;
+
+import com.grigoriliev.jsampler.juife.TaskQueue;
 
 /**
  * A semantic event which indicates that the state of a task queue is changed.
@@ -49,13 +51,13 @@ public class TaskQueueEvent extends java.util.EventObject {
 		
 		/**
 		 * Indicates that a new task has been fetched for execution from the queue.
-		 * @see net.sf.juife.TaskQueue#getRunningTask
+		 * @see TaskQueue#getRunningTask
 		 */
 		TASK_FETCHED,
 		
 		/**
 		 * Indicates that the current running task is done.
-		 * @see net.sf.juife.TaskQueue#getRunningTask
+		 * @see TaskQueue#getRunningTask
 		 */
 		TASK_DONE
 	}

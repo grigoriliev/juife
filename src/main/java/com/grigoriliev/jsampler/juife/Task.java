@@ -20,9 +20,9 @@
  *   MA  02110-1301, USA
  */
 
-package net.sf.juife;
+package com.grigoriliev.jsampler.juife;
 
-import net.sf.juife.event.TaskListener;
+import com.grigoriliev.jsampler.juife.event.TaskListener;
 
 
 /**

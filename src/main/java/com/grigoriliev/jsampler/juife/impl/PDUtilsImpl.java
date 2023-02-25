@@ -20,36 +20,18 @@
  *   MA  02110-1301, USA
  */
 
-package net.sf.juife.impl;
+package com.grigoriliev.jsampler.juife.impl;
 
-public class DefaultPDUtilsImpl implements PDUtilsImpl {
+public interface PDUtilsImpl {
 	/**
 	 * Causes <code>r.run()</code> to be executed asynchronously on the UI thread.
 	 * This call returns immediately.
 	 */
-	public void
-	runOnUiThread(Runnable r) {
-		try {
-			Class.forName("javax.swing.SwingUtilities")
-				.getMethod("invokeLater", Runnable.class)
-				.invoke(null, r);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
+	void runOnUiThread(Runnable r);
 	
 	/**
 	 * Causes <code>r.run()</code> to be executed synchronously on the UI thread.
 	 * This call blocks until <code>r.run()</code> returns.
 	 */
-	public void
-	runOnUiThreadAndWait(Runnable r) throws Exception {
-		try {
-			Class.forName("javax.swing.SwingUtilities")
-				.getMethod("invokeAndWait", Runnable.class)
-				.invoke(null, r);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
+	void runOnUiThreadAndWait(Runnable r) throws Exception;
 }

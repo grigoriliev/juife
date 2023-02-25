@@ -20,43 +20,36 @@
  *   MA  02110-1301, USA
  */
 
-package net.sf.juife;
+package com.grigoriliev.jsampler.juife.impl;
 
-import net.sf.juife.impl.PDUtilsImpl;
-
-/** Platform dependent utilities */
-public class PDUtils {
-	private static PDUtilsImpl impl = null;
-	static {
-		String s = System.getProperties().getProperty("java.vm.name");
-		try {
-			if (s == null) {
-				impl = (PDUtilsImpl)Class.forName("net.sf.juife.impl.DefaultPDUtilsImpl").newInstance();
-			} else if(s.toLowerCase().contains("dalvik")) {
-				impl = (PDUtilsImpl)Class.forName("net.sf.juife.impl.AndroidPDUtilsImpl").newInstance();
-			} else {
-				impl = (PDUtilsImpl)Class.forName("net.sf.juife.impl.DefaultPDUtilsImpl").newInstance();
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
-	
+public class DefaultPDUtilsImpl implements PDUtilsImpl {
 	/**
 	 * Causes <code>r.run()</code> to be executed asynchronously on the UI thread.
 	 * This call returns immediately.
 	 */
-	public static void
+	public void
 	runOnUiThread(Runnable r) {
-		impl.runOnUiThread(r);
+		try {
+			Class.forName("javax.swing.SwingUtilities")
+				.getMethod("invokeLater", Runnable.class)
+				.invoke(null, r);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 	/**
 	 * Causes <code>r.run()</code> to be executed synchronously on the UI thread.
 	 * This call blocks until <code>r.run()</code> returns.
 	 */
-	public static void
+	public void
 	runOnUiThreadAndWait(Runnable r) throws Exception {
-		impl.runOnUiThreadAndWait(r);
+		try {
+			Class.forName("javax.swing.SwingUtilities")
+				.getMethod("invokeAndWait", Runnable.class)
+				.invoke(null, r);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

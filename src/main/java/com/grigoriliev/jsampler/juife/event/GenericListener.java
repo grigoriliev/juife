@@ -1,7 +1,7 @@
 /*
  *   juife - Java User Interface Framework Extensions
  *
- *   Copyright (C) 2005-2007 Grigor Iliev <grigor@grigoriliev.com>
+ *   Copyright (C) 2011 Grigor Iliev <grigor@grigoriliev.com>
  *
  *   This file is part of juife.
  *
@@ -20,17 +20,15 @@
  *   MA  02110-1301, USA
  */
 
-package net.sf.juife.event;
-
+package com.grigoriliev.jsampler.juife.event;
 
 /**
- * The listener interface that is notified when a particular task has been done.
+ * The listener interface that is notified when a generic event has been done.
  * @author  Grigor Iliev
  */
-public interface TaskListener extends java.util.EventListener {
+public interface GenericListener extends java.util.EventListener {
 	/**
-	 * Invoked to indicate that the task has been done.
-	 * This method is invoked only from the event-dispatching thread.
+	 * Invoked to indicate that a generic event has been done.
 	 */
-	void taskPerformed(TaskEvent e);
+	void jobDone(GenericEvent e);
 }

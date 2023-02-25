@@ -20,15 +20,13 @@
  *   MA  02110-1301, USA
  */
 
-package net.sf.juife;
+package com.grigoriliev.jsampler.juife;
 
 import java.util.LinkedList;
 import java.util.Vector;
 
-import net.sf.juife.event.TaskQueueEvent;
-import net.sf.juife.event.TaskQueueListener;
-
-import static net.sf.juife.event.TaskQueueEvent.ID;
+import com.grigoriliev.jsampler.juife.event.TaskQueueEvent;
+import com.grigoriliev.jsampler.juife.event.TaskQueueListener;
 
 
 /**
@@ -103,11 +101,11 @@ public class TaskQueue {
 		taskQueue.add(task);
 		
 		if(taskQueue.size() == 1)
-			fireTaskQueueEvent(new TaskQueueEvent(this, ID.FILLED));
+			fireTaskQueueEvent(new TaskQueueEvent(this, TaskQueueEvent.ID.FILLED));
 		
 		if(isIdle()) {
 			idle = false;
-			fireTaskQueueEvent(new TaskQueueEvent(this, ID.NOT_IDLE));
+			fireTaskQueueEvent(new TaskQueueEvent(this, TaskQueueEvent.ID.NOT_IDLE));
 		}
 		
 		notifyAll();
@@ -130,7 +128,7 @@ public class TaskQueue {
 		}
 		
 		started = true;
-		fireTaskQueueEvent(new TaskQueueEvent(this, ID.STARTED));
+		fireTaskQueueEvent(new TaskQueueEvent(this, TaskQueueEvent.ID.STARTED));
 		
 		new Thread(name) {
 			public void
@@ -164,16 +162,16 @@ public class TaskQueue {
 			synchronized(this) {
 				currentTask = taskQueue.poll();
 				fireTaskQueueEvent (
-					new TaskQueueEvent(currentTask, ID.TASK_FETCHED)
+					new TaskQueueEvent(currentTask, TaskQueueEvent.ID.TASK_FETCHED)
 				);
 				if(isEmpty()) fireTaskQueueEvent (
-					new TaskQueueEvent(this, ID.EMPTY)
+					new TaskQueueEvent(this, TaskQueueEvent.ID.EMPTY)
 				);
 			}
 			currentTask.invokeAndWait();
 			synchronized(this) {
 				fireTaskQueueEvent (
-					new TaskQueueEvent(currentTask, ID.TASK_DONE)
+					new TaskQueueEvent(currentTask, TaskQueueEvent.ID.TASK_DONE)
 				);
 				
 				currentTask = null;
@@ -181,7 +179,7 @@ public class TaskQueue {
 				if(isEmpty()) {
 					idle = true;
 					fireTaskQueueEvent (
-						new TaskQueueEvent(this, ID.IDLE)
+						new TaskQueueEvent(this, TaskQueueEvent.ID.IDLE)
 					);
 					return;
 				}
@@ -229,7 +227,7 @@ public class TaskQueue {
 	public synchronized void
 	stop() {
 		stop = true;
-		fireTaskQueueEvent(new TaskQueueEvent(this, ID.STOPPED));
+		fireTaskQueueEvent(new TaskQueueEvent(this, TaskQueueEvent.ID.STOPPED));
 		notifyAll();
 	}
 	

@@ -20,25 +20,20 @@
  *   MA  02110-1301, USA
  */
 
-package net.sf.juife;
+package com.grigoriliev.jsampler.juife.event;
 
 
 /**
- * The <code>JuifeI18n</code> class manages the locale-specific data of this library.
- *
+ * A semantic event which indicates that a particular task has been done.
  * @author  Grigor Iliev
  */
-public class JuifeI18n extends I18n {
-	/** Provides the locale-specific data of this library. */
-	public static JuifeI18n i18n = new JuifeI18n();
+public class TaskEvent extends java.util.EventObject {
 	
-	private
-	JuifeI18n() {
-		setButtonsBundle("net.sf.juife.langprops.ButtonsLabelsBundle");
-		setErrorsBundle("net.sf.juife.langprops.ErrorsBundle");
-		setLabelsBundle("net.sf.juife.langprops.LabelsBundle");
-		setLogsBundle("net.sf.juife.langprops.LogsBundle");
-		setMenusBundle("net.sf.juife.langprops.MenuLabelsBundle");
-		setMessagesBundle("net.sf.juife.langprops.MessagesBundle");
-	}
+	/**
+	 * Constructs a <code>TaskEvent</code> object.
+	 * @param source The object that originated the event.
+	 */
+	public
+	TaskEvent(Object source) { super(source); }
+	
 }

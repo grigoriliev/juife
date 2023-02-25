@@ -20,44 +20,43 @@
  *   MA  02110-1301, USA
  */
 
-package net.sf.juife.impl;
+package com.grigoriliev.jsampler.juife;
 
-import android.app.Activity;
+import com.grigoriliev.jsampler.juife.impl.PDUtilsImpl;
 
-public class AndroidPDUtilsImpl implements PDUtilsImpl {
-	/** Should be set before using <code>PDUtils</code> */
-	public static Activity activity = null;
+/** Platform dependent utilities */
+public class PDUtils {
+	private static PDUtilsImpl impl = null;
+	static {
+		String s = System.getProperties().getProperty("java.vm.name");
+		try {
+			if (s == null) {
+				impl = (PDUtilsImpl)Class.forName("com.grigoriliev.jsampler.juife.impl.DefaultPDUtilsImpl").newInstance();
+			} else if(s.toLowerCase().contains("dalvik")) {
+				impl = (PDUtilsImpl)Class.forName("com.grigoriliev.jsampler.juife.impl.AndroidPDUtilsImpl").newInstance();
+			} else {
+				impl = (PDUtilsImpl)Class.forName("com.grigoriliev.jsampler.juife.impl.DefaultPDUtilsImpl").newInstance();
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
 	
 	/**
 	 * Causes <code>r.run()</code> to be executed asynchronously on the UI thread.
 	 * This call returns immediately.
 	 */
-	public void
+	public static void
 	runOnUiThread(Runnable r) {
-		if(activity == null) throw new UnsupportedOperationException("'activity' field should be set before using this method");
-		activity.runOnUiThread(r);
+		impl.runOnUiThread(r);
 	}
 	
 	/**
 	 * Causes <code>r.run()</code> to be executed synchronously on the UI thread.
 	 * This call blocks until <code>r.run()</code> returns.
 	 */
-	public void
-	runOnUiThreadAndWait(final Runnable r) throws Exception {
-		if(activity == null) throw new UnsupportedOperationException("'activity' field should be set before using this method");
-		
-		Runnable run = new Runnable() {
-			public void run() {
-				try { r.run(); }
-				catch(Throwable t) { t.printStackTrace(); }
-				
-				synchronized(this) { this.notify(); }
-			}
-		};
-		
-		synchronized(run) {
-			activity.runOnUiThread(run);
-			run.wait();
-		}
+	public static void
+	runOnUiThreadAndWait(Runnable r) throws Exception {
+		impl.runOnUiThreadAndWait(r);
 	}
 }

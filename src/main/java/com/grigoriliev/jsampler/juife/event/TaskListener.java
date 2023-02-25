@@ -20,16 +20,17 @@
  *   MA  02110-1301, USA
  */
 
-package net.sf.juife.event;
+package com.grigoriliev.jsampler.juife.event;
+
 
 /**
- * The listener interface that is notified when the state of a task queue is changed.
- * @author Grigor Iliev
+ * The listener interface that is notified when a particular task has been done.
+ * @author  Grigor Iliev
  */
-public interface TaskQueueListener {
+public interface TaskListener extends java.util.EventListener {
 	/**
-	 * Invoked to indicate that the state of a task queue is changed.
+	 * Invoked to indicate that the task has been done.
 	 * This method is invoked only from the event-dispatching thread.
 	 */
-	void stateChanged(TaskQueueEvent e);
+	void taskPerformed(TaskEvent e);
 }
