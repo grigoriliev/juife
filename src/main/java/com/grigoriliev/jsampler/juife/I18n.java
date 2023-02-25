@@ -53,6 +53,10 @@ public class I18n {
 	/** Creates a new instance of <code>I18n</code>. */
 	public
 	I18n() { }
+
+	protected ResourceBundle getBundle(String baseName, Locale locale) {
+		return ResourceBundle.getBundle(baseName, locale);
+	}
 	
 	/**
 	 * Sets the current locale using the specified language and country.
@@ -64,22 +68,22 @@ public class I18n {
 		currentLocale = new Locale(language, country);
 		
 		if(buttonsBundle == null) buttonLabels = null;
-		else buttonLabels = ResourceBundle.getBundle(buttonsBundle, getCurrentLocale());
+		else buttonLabels = getBundle(buttonsBundle, getCurrentLocale());
 		
 		if(labelsBundle == null) labels = null;
-		else labels = ResourceBundle.getBundle(labelsBundle, getCurrentLocale());
+		else labels = getBundle(labelsBundle, getCurrentLocale());
 		
 		if(menusBundle == null) menuLabels = null;
-		else menuLabels = ResourceBundle.getBundle(menusBundle, getCurrentLocale());
+		else menuLabels = getBundle(menusBundle, getCurrentLocale());
 		
 		if(errorsBundle == null) errors = null;
-		else errors = ResourceBundle.getBundle(errorsBundle, getCurrentLocale());
+		else errors = getBundle(errorsBundle, getCurrentLocale());
 		
 		if(messagesBundle == null) messages = null;
-		else messages = ResourceBundle.getBundle(messagesBundle, getCurrentLocale());
+		else messages = getBundle(messagesBundle, getCurrentLocale());
 		
 		if(logsBundle == null) logMessages = null;
-		else logMessages = ResourceBundle.getBundle(logsBundle, getCurrentLocale());
+		else logMessages = getBundle(logsBundle, getCurrentLocale());
 	}
 	
 	/**
@@ -102,7 +106,7 @@ public class I18n {
 		buttonsBundle = baseName;
 		
 		if(buttonsBundle == null) buttonLabels = null;
-		else buttonLabels = ResourceBundle.getBundle(buttonsBundle, getCurrentLocale());
+		else buttonLabels = getBundle(buttonsBundle, getCurrentLocale());
 	}
 	
 	/**
@@ -115,7 +119,7 @@ public class I18n {
 		labelsBundle = baseName;
 		
 		if(labelsBundle == null) labels = null;
-		else labels = ResourceBundle.getBundle(labelsBundle, getCurrentLocale());
+		else labels = getBundle(labelsBundle, getCurrentLocale());
 	}
 	
 	/**
@@ -128,7 +132,7 @@ public class I18n {
 		menusBundle = baseName;
 		
 		if(menusBundle == null) menuLabels = null;
-		else menuLabels = ResourceBundle.getBundle(menusBundle, getCurrentLocale());
+		else menuLabels = getBundle(menusBundle, getCurrentLocale());
 	}
 	
 	/**
@@ -141,7 +145,7 @@ public class I18n {
 		errorsBundle = baseName;
 		
 		if(errorsBundle == null) errors = null;
-		else errors = ResourceBundle.getBundle(errorsBundle, getCurrentLocale());
+		else errors = getBundle(errorsBundle, getCurrentLocale());
 	}
 	
 	/**
@@ -154,7 +158,7 @@ public class I18n {
 		messagesBundle = baseName;
 		
 		if(messagesBundle == null) messages = null;
-		else messages = ResourceBundle.getBundle(messagesBundle, getCurrentLocale());
+		else messages = getBundle(messagesBundle, getCurrentLocale());
 	}
 	
 	/**
@@ -167,7 +171,7 @@ public class I18n {
 		logsBundle = baseName;
 		
 		if(logsBundle == null) logMessages = null;
-		else logMessages = ResourceBundle.getBundle(logsBundle, getCurrentLocale());
+		else logMessages = getBundle(logsBundle, getCurrentLocale());
 	}
 	
 	/**
